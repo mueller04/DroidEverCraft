@@ -1,5 +1,4 @@
-import com.example.mike.droidevercraft.yay.*;
-import com.example.mike.droidevercraft.yay.Enum;
+package com.example.mike.droidevercraft;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +14,8 @@ public class IntegrationTests {
 
     @Before
     public void beforeEachMethod(){
-        everCharacter = new EverCraftCharacter("Defending Character", com.example.mike.droidevercraft.yay.Enum.Alignment.Neutral);
-        attackingEverCharacter = new EverCraftCharacter("Attacking Character", Enum.Alignment.Neutral);
+        everCharacter = new EverCraftCharacter("Defending Character", com.example.mike.droidevercraft.EverEnum.Alignment.Neutral);
+        attackingEverCharacter = new EverCraftCharacter("Attacking Character", EverEnum.Alignment.Neutral);
         play = new Play();
     }
 
@@ -107,7 +106,7 @@ public class IntegrationTests {
         play.roll(everCharacter, attackingEverCharacter, 20);
 
         //Assert
-        assertEquals(Enum.LifeStatus.Dead, everCharacter.getLifeStatus());
+        assertEquals(EverEnum.LifeStatus.Dead, everCharacter.getLifeStatus());
     }
 
     //same as above
@@ -120,7 +119,7 @@ public class IntegrationTests {
         play.roll(everCharacter, attackingEverCharacter, 20);
 
         //Assert
-        assertEquals(Enum.LifeStatus.Dead, everCharacter.getLifeStatus());
+        assertEquals(EverEnum.LifeStatus.Dead, everCharacter.getLifeStatus());
     }
 
     @Test
@@ -132,13 +131,13 @@ public class IntegrationTests {
         play.roll(everCharacter, attackingEverCharacter, 20);
 
         //Assert
-        assertEquals(Enum.LifeStatus.Alive, everCharacter.getLifeStatus());
+        assertEquals(EverEnum.LifeStatus.Alive, everCharacter.getLifeStatus());
     }
 
     @Test
     public void defenderClassIgnoresAttackersStrengthModifier(){
         //Arrange
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.DEFENDER);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.DEFENDER);
         attackingEverCharacter.getAbilities().setStrengthScore(20);
 
         //Act
@@ -151,7 +150,7 @@ public class IntegrationTests {
     @Test
     public void warlordClassIgnoresDefendersDexterityModifier(){
         //Arrange
-        attackingEverCharacter.setCharacterClass(Enum.CharacterClassEnum.WARLORD);
+        attackingEverCharacter.setCharacterClass(EverEnum.CharacterClassEnum.WARLORD);
         everCharacter.getAbilities().setDexterityScore(20);
 
         //Act
@@ -164,8 +163,8 @@ public class IntegrationTests {
     @Test
     public void rogueHitAgainstEvilAdds2ToAttack(){
         //Arrange
-        attackingEverCharacter.setCharacterClass(Enum.CharacterClassEnum.ROGUE);
-        everCharacter.setAlignment(Enum.Alignment.Evil);
+        attackingEverCharacter.setCharacterClass(EverEnum.CharacterClassEnum.ROGUE);
+        everCharacter.setAlignment(EverEnum.Alignment.Evil);
 
         //Act
         play.roll(everCharacter, attackingEverCharacter, 14);
@@ -177,8 +176,8 @@ public class IntegrationTests {
     @Test
     public void rogueHitAgainstGoodAddsRegularAttack(){
         //Arrange
-        attackingEverCharacter.setCharacterClass(Enum.CharacterClassEnum.ROGUE);
-        everCharacter.setAlignment(Enum.Alignment.Good);
+        attackingEverCharacter.setCharacterClass(EverEnum.CharacterClassEnum.ROGUE);
+        everCharacter.setAlignment(EverEnum.Alignment.Good);
 
         //Act
         play.roll(everCharacter, attackingEverCharacter, 14);
@@ -190,8 +189,8 @@ public class IntegrationTests {
     @Test
     public void rogueHitAgainstEvilAdds2AndMultiplesBy3ToAttackWhenCrit(){
         //Arrange
-        attackingEverCharacter.setCharacterClass(Enum.CharacterClassEnum.ROGUE);
-        everCharacter.setAlignment(Enum.Alignment.Evil);
+        attackingEverCharacter.setCharacterClass(EverEnum.CharacterClassEnum.ROGUE);
+        everCharacter.setAlignment(EverEnum.Alignment.Evil);
         everCharacter.setHitPoints(20);
 
         //Act
@@ -204,11 +203,11 @@ public class IntegrationTests {
     @Test
     public void dwarfHitAgainstOrcAdds2ToRegularAttack(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Defending Character", Enum.Alignment.Neutral);
-        attackingEverCharacter = new EverCraftCharacter("Attacking Character", Enum.Alignment.Neutral);
-        attackingEverCharacter.setCharacterClass(Enum.CharacterClassEnum.DEFAULT);
-        everCharacter.setRace(Enum.RaceEnum.ORC);
-        attackingEverCharacter.setRace(Enum.RaceEnum.DWARF);
+        everCharacter = new EverCraftCharacter("Defending Character", EverEnum.Alignment.Neutral);
+        attackingEverCharacter = new EverCraftCharacter("Attacking Character", EverEnum.Alignment.Neutral);
+        attackingEverCharacter.setCharacterClass(EverEnum.CharacterClassEnum.DEFAULT);
+        everCharacter.setRace(EverEnum.RaceEnum.ORC);
+        attackingEverCharacter.setRace(EverEnum.RaceEnum.DWARF);
 
         //Act
         play.roll(everCharacter, attackingEverCharacter, 12);
@@ -220,10 +219,10 @@ public class IntegrationTests {
     @Test
     public void halflingPlus2ToArmorWhenNotBeingHitByHalfling(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Defending Character", Enum.Alignment.Neutral);
-        attackingEverCharacter = new EverCraftCharacter("Attacking Character", Enum.Alignment.Neutral);
-        everCharacter.setRace(Enum.RaceEnum.HALFLING);
-        attackingEverCharacter.setRace(Enum.RaceEnum.DWARF);
+        everCharacter = new EverCraftCharacter("Defending Character", EverEnum.Alignment.Neutral);
+        attackingEverCharacter = new EverCraftCharacter("Attacking Character", EverEnum.Alignment.Neutral);
+        everCharacter.setRace(EverEnum.RaceEnum.HALFLING);
+        attackingEverCharacter.setRace(EverEnum.RaceEnum.DWARF);
 
         //Act
         String result = play.roll(everCharacter, attackingEverCharacter, 11);
@@ -235,10 +234,10 @@ public class IntegrationTests {
     @Test
     public void nonHalflingNoAdditionalArmorWhenAttackedByHalfling(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Defending Character", Enum.Alignment.Neutral);
-        attackingEverCharacter = new EverCraftCharacter("Attacking Character", Enum.Alignment.Neutral);
-        everCharacter.setRace(Enum.RaceEnum.ELF);
-        attackingEverCharacter.setRace(Enum.RaceEnum.DWARF);
+        everCharacter = new EverCraftCharacter("Defending Character", EverEnum.Alignment.Neutral);
+        attackingEverCharacter = new EverCraftCharacter("Attacking Character", EverEnum.Alignment.Neutral);
+        everCharacter.setRace(EverEnum.RaceEnum.ELF);
+        attackingEverCharacter.setRace(EverEnum.RaceEnum.DWARF);
 
         //Act
         String result = play.roll(everCharacter, attackingEverCharacter, 11);
@@ -250,10 +249,10 @@ public class IntegrationTests {
     @Test
     public void halflingAttackedByOtherHalflingNoAdditionalArmor(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Defending Character", Enum.Alignment.Neutral);
-        attackingEverCharacter = new EverCraftCharacter("Attacking Character", Enum.Alignment.Neutral);
-        everCharacter.setRace(Enum.RaceEnum.HALFLING);
-        attackingEverCharacter.setRace(Enum.RaceEnum.HALFLING);
+        everCharacter = new EverCraftCharacter("Defending Character", EverEnum.Alignment.Neutral);
+        attackingEverCharacter = new EverCraftCharacter("Attacking Character", EverEnum.Alignment.Neutral);
+        everCharacter.setRace(EverEnum.RaceEnum.HALFLING);
+        attackingEverCharacter.setRace(EverEnum.RaceEnum.HALFLING);
 
         //Act
         String result = play.roll(everCharacter, attackingEverCharacter, 11);
@@ -265,12 +264,12 @@ public class IntegrationTests {
     @Test
     public void longSwordAttackAgainstOrcAdds2ToDamage(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Defending Character", Enum.Alignment.Neutral);
-        attackingEverCharacter = new EverCraftCharacter("Attacking Character", Enum.Alignment.Neutral);
-        everCharacter.setRace(Enum.RaceEnum.ORC);
+        everCharacter = new EverCraftCharacter("Defending Character", EverEnum.Alignment.Neutral);
+        attackingEverCharacter = new EverCraftCharacter("Attacking Character", EverEnum.Alignment.Neutral);
+        everCharacter.setRace(EverEnum.RaceEnum.ORC);
         everCharacter.setHitPoints(20);
-        attackingEverCharacter.setRace(Enum.RaceEnum.HUMAN);
-        attackingEverCharacter.setWeapon(Enum.Weapon.LONGSWORD);
+        attackingEverCharacter.setRace(EverEnum.RaceEnum.HUMAN);
+        attackingEverCharacter.setWeapon(EverEnum.Weapon.LONGSWORD);
 
         //Act
         play.roll(everCharacter, attackingEverCharacter, 12);
@@ -283,12 +282,12 @@ public class IntegrationTests {
     @Test
     public void longSwordElfAttackAgainstOrcAdds5ToDamage(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Defending Character", Enum.Alignment.Neutral);
-        attackingEverCharacter = new EverCraftCharacter("Attacking Character", Enum.Alignment.Neutral);
-        everCharacter.setRace(Enum.RaceEnum.ORC);
+        everCharacter = new EverCraftCharacter("Defending Character", EverEnum.Alignment.Neutral);
+        attackingEverCharacter = new EverCraftCharacter("Attacking Character", EverEnum.Alignment.Neutral);
+        everCharacter.setRace(EverEnum.RaceEnum.ORC);
         everCharacter.setHitPoints(20);
-        attackingEverCharacter.setRace(Enum.RaceEnum.ELF);
-        attackingEverCharacter.setWeapon(Enum.Weapon.LONGSWORD);
+        attackingEverCharacter.setRace(EverEnum.RaceEnum.ELF);
+        attackingEverCharacter.setWeapon(EverEnum.Weapon.LONGSWORD);
 
         //Act
         play.roll(everCharacter, attackingEverCharacter, 10);

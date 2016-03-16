@@ -1,3 +1,5 @@
+package com.example.mike.droidevercraft;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -9,8 +11,8 @@ public class CharacterClassTest {
     @Test
     public void defenderClassIncreasesHitPoints(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.DEFENDER);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.DEFENDER);
         int expectedHitPoints = 10;
 
         //Act
@@ -23,10 +25,10 @@ public class CharacterClassTest {
     @Test
     public void defenderClassAlignmentCannotBeEvil(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Evil);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Evil);
         try {
             //Act
-            everCharacter.setCharacterClass(Enum.CharacterClassEnum.DEFENDER);
+            everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.DEFENDER);
         } catch (Exception e) {
             //Assert
             assertEquals(e.getMessage(), "Defender Class cannot have evil alignment");
@@ -36,23 +38,23 @@ public class CharacterClassTest {
     @Test
     public void defaultClassAlignmentCanBeEvil(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Evil);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Evil);
 
         //Act
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.DEFAULT);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.DEFAULT);
 
         //Assert
-        assertEquals(Enum.CharacterClassEnum.DEFAULT, everCharacter.getCharacterClass());
+        assertEquals(EverEnum.CharacterClassEnum.DEFAULT, everCharacter.getCharacterClass());
     }
 
     @Test
     public void defenderClassDoublesDexterityModifierIfPositive(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Neutral);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Neutral);
         everCharacter.getAbilities().setDexterityScore(14);
 
         //Act
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.DEFENDER);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.DEFENDER);
 
         //Assert
         assertEquals(14, everCharacter.getModifiedArmor());
@@ -61,11 +63,11 @@ public class CharacterClassTest {
     @Test
     public void defenderClassRegularDexterityModifierIfNegative(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Neutral);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Neutral);
         everCharacter.getAbilities().setDexterityScore(5);
 
         //Act
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.DEFENDER);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.DEFENDER);
 
         //Assert
         assertEquals(6, everCharacter.getModifiedArmor());
@@ -74,8 +76,8 @@ public class CharacterClassTest {
     @Test
     public void warlordClassTripleDamageOnCriticalHits(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Evil);
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.WARLORD);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Evil);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.WARLORD);
 
         //Act
         int result = everCharacter.calculateHitPointsAndAttackStrength(true);
@@ -87,10 +89,10 @@ public class CharacterClassTest {
     @Test
     public void warlordClassAlignmentCannotBeGood(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
         try {
             //Act
-            everCharacter.setCharacterClass(Enum.CharacterClassEnum.WARLORD);
+            everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.WARLORD);
         } catch (Exception e) {
             //Assert
             assertEquals(e.getMessage(), "Warlord Class cannot have good alignment");
@@ -100,8 +102,8 @@ public class CharacterClassTest {
     @Test
     public void rogueClassAddsDexterityModifierToStrength(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Neutral);
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.ROGUE);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Neutral);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.ROGUE);
         everCharacter.getAbilities().setDexterityScore(20);
 
         //Act
@@ -114,10 +116,10 @@ public class CharacterClassTest {
     @Test
     public void rogueClassAlignmentCannotBeGood(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
         try {
             //Act
-            everCharacter.setCharacterClass(Enum.CharacterClassEnum.ROGUE);
+            everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.ROGUE);
         } catch (Exception e) {
             //Assert
             assertEquals(e.getMessage(), "Rogue Class cannot have good or evil alignment");
@@ -127,10 +129,10 @@ public class CharacterClassTest {
     @Test
     public void rogueClassAlignmentCannotBeEvil(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Evil);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Evil);
         try {
             //Act
-            everCharacter.setCharacterClass(Enum.CharacterClassEnum.ROGUE);
+            everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.ROGUE);
         } catch (Exception e) {
             //Assert
             assertEquals(e.getMessage(), "Rogue Class cannot have good or evil alignment");
@@ -140,8 +142,8 @@ public class CharacterClassTest {
     @Test
     public void warlordClassDoublesStrengthModifier(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Neutral);
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.WARLORD);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Neutral);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.WARLORD);
         everCharacter.getAbilities().setStrengthScore(20);
 
         //Act
@@ -154,9 +156,9 @@ public class CharacterClassTest {
     @Test
     public void eachAdditionalLevelAfterLevel1Adds6HitPointsPlusConstitutionModifierForWarlordClass(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Evil);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Evil);
         everCharacter.getAbilities().setConstitutionScore(12);
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.WARLORD);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.WARLORD);
 
         //Act
         everCharacter.addExperiencePoints(3058);
@@ -170,8 +172,8 @@ public class CharacterClassTest {
     @Test
     public void warlordClassAdd2ToCriticalRange(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Neutral);
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.WARLORD);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Neutral);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.WARLORD);
 
         //Act
         int result = everCharacter.getCriticalRange();
@@ -184,8 +186,8 @@ public class CharacterClassTest {
     @Test
     public void monkClassDoes3DamageWhenAttacking(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Neutral);
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.MONK);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Neutral);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.MONK);
 
         //Act
         int result = everCharacter.calculateHitPointsAndAttackStrength(false);
@@ -197,8 +199,8 @@ public class CharacterClassTest {
     @Test
     public void monkAddsPositiveWisdomToArmor(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Neutral);
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.MONK);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Neutral);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.MONK);
         everCharacter.getAbilities().setWisdomScore(17);
 
         //Act
@@ -211,8 +213,8 @@ public class CharacterClassTest {
     @Test
     public void monkDoesNotAddNegativeWisdomToArmor(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Neutral);
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.MONK);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Neutral);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.MONK);
         everCharacter.getAbilities().setWisdomScore(8);
 
         //Act

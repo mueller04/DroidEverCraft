@@ -1,5 +1,4 @@
-import com.example.mike.droidevercraft.yay.*;
-import com.example.mike.droidevercraft.yay.Enum;
+package com.example.mike.droidevercraft;
 
 import org.junit.Test;
 
@@ -12,12 +11,12 @@ public class WeaponTest {
     @Test
     public void canAssignWeapon() {
         //Arrange
-        com.example.mike.droidevercraft.yay.Enum.Weapon expectedWeapon = Enum.Weapon.DAGGER;
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
+        com.example.mike.droidevercraft.EverEnum.Weapon expectedWeapon = EverEnum.Weapon.DAGGER;
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
         everCharacter.setWeapon(expectedWeapon);
 
         //Act
-        Enum.Weapon result = everCharacter.getWeapon();
+        EverEnum.Weapon result = everCharacter.getWeapon();
 
         //Assert
         assertEquals(expectedWeapon, result);
@@ -26,13 +25,13 @@ public class WeaponTest {
     @Test
     public void canAssignOnly1Weapon() {
         //Arrange
-        Enum.Weapon expectedWeapon = Enum.Weapon.DAGGER;
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setWeapon(Enum.Weapon.KNIFEOFOGRESLAYING);
+        EverEnum.Weapon expectedWeapon = EverEnum.Weapon.DAGGER;
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setWeapon(EverEnum.Weapon.KNIFEOFOGRESLAYING);
         everCharacter.setWeapon(expectedWeapon);
 
         //Act
-        Enum.Weapon result = everCharacter.getWeapon();
+        EverEnum.Weapon result = everCharacter.getWeapon();
 
         //Assert
         assertEquals(expectedWeapon, result);
@@ -41,20 +40,20 @@ public class WeaponTest {
     @Test
     public void defaultIsNoWeapon() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
 
         //Act
-        Enum.Weapon result = everCharacter.getWeapon();
+        EverEnum.Weapon result = everCharacter.getWeapon();
 
         //Assert
-        assertEquals(Enum.Weapon.NOWEAPON, result);
+        assertEquals(EverEnum.Weapon.NOWEAPON, result);
     }
 
     @Test
     public void DaggerAdds1ToDamage() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setWeapon(Enum.Weapon.DAGGER);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setWeapon(EverEnum.Weapon.DAGGER);
 
         //Act
         int result = everCharacter.calculateHitPointsAndAttackStrength(false);
@@ -66,8 +65,8 @@ public class WeaponTest {
     @Test
     public void longswordAdds5ToDamage() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setWeapon(Enum.Weapon.LONGSWORD);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setWeapon(EverEnum.Weapon.LONGSWORD);
 
         //Act
         int result = everCharacter.calculateHitPointsAndAttackStrength(false);
@@ -79,8 +78,8 @@ public class WeaponTest {
     @Test
     public void warAxeAdds2ToDamage() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setWeapon(Enum.Weapon.WARAXE);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setWeapon(EverEnum.Weapon.WARAXE);
 
         //Act
         int result = everCharacter.calculateHitPointsAndAttackStrength(false);
@@ -92,8 +91,8 @@ public class WeaponTest {
     @Test
     public void warAxeAdds2ToModifiedAttack() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setWeapon(Enum.Weapon.WARAXE);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setWeapon(EverEnum.Weapon.WARAXE);
 
         //Act
         int result = everCharacter.getModifiedRollNumber(10);
@@ -105,8 +104,8 @@ public class WeaponTest {
     @Test
     public void warAxeDoesTripleDamageOnCritical() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setWeapon(Enum.Weapon.WARAXE);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setWeapon(EverEnum.Weapon.WARAXE);
 
         //Act
         int result = everCharacter.calculateHitPointsAndAttackStrength(true);
@@ -118,9 +117,9 @@ public class WeaponTest {
     @Test
     public void warAxeDoesQuadrupleDamageOnCriticalWithRogue() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Neutral);
-        everCharacter.setWeapon(Enum.Weapon.WARAXE);
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.ROGUE);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Neutral);
+        everCharacter.setWeapon(EverEnum.Weapon.WARAXE);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.ROGUE);
 
         //Act
         int result = everCharacter.calculateHitPointsAndAttackStrength(true);
@@ -132,9 +131,9 @@ public class WeaponTest {
     @Test
     public void longswordAdds2ToDamageForElf() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setWeapon(Enum.Weapon.LONGSWORD);
-        everCharacter.setRace(Enum.RaceEnum.ELF);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setWeapon(EverEnum.Weapon.LONGSWORD);
+        everCharacter.setRace(EverEnum.RaceEnum.ELF);
 
         //Act
         int result = everCharacter.calculateHitPointsAndAttackStrength(false);
@@ -146,9 +145,9 @@ public class WeaponTest {
     @Test
     public void longswordAdds2ToModifiedRollForElf() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setWeapon(Enum.Weapon.LONGSWORD);
-        everCharacter.setRace(Enum.RaceEnum.ELF);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setWeapon(EverEnum.Weapon.LONGSWORD);
+        everCharacter.setRace(EverEnum.RaceEnum.ELF);
 
         //Act
         int result = everCharacter.getModifiedRollNumber(10);
@@ -160,9 +159,9 @@ public class WeaponTest {
     @Test
     public void nunChucksAdds6ToAttackDamage() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setWeapon(Enum.Weapon.NUNCHUCKS);
-        everCharacter.setRace(Enum.RaceEnum.ELF);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setWeapon(EverEnum.Weapon.NUNCHUCKS);
+        everCharacter.setRace(EverEnum.RaceEnum.ELF);
 
         //Act
         int result = everCharacter.calculateHitPointsAndAttackStrength(false);
@@ -174,8 +173,8 @@ public class WeaponTest {
     @Test
     public void nunChucksUsedByNonMonk4PenaltyToModifiedAttackRoll() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setWeapon(Enum.Weapon.NUNCHUCKS);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setWeapon(EverEnum.Weapon.NUNCHUCKS);
 
         //Act
         int result = everCharacter.getModifiedRollNumber(10);
@@ -187,9 +186,9 @@ public class WeaponTest {
     @Test
     public void nunChucksUsedByMonkResultsInRegularAttackRoll() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setWeapon(Enum.Weapon.NUNCHUCKS);
-        everCharacter.setCharacterClass(Enum.CharacterClassEnum.MONK);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setWeapon(EverEnum.Weapon.NUNCHUCKS);
+        everCharacter.setCharacterClass(EverEnum.CharacterClassEnum.MONK);
 
         //Act
         int result = everCharacter.getModifiedRollNumber(10);
@@ -201,9 +200,9 @@ public class WeaponTest {
     @Test
     public void KNIFEOFOGRESLAYINGAdds10ToAttackDamage() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.DWARF);
-        everCharacter.setWeapon(Enum.Weapon.KNIFEOFOGRESLAYING);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.DWARF);
+        everCharacter.setWeapon(EverEnum.Weapon.KNIFEOFOGRESLAYING);
 
         //Act
         int result = everCharacter.calculateHitPointsAndAttackStrength(false);
@@ -215,14 +214,14 @@ public class WeaponTest {
     @Test
     public void humanCannotWieldKNIFEOFOGRESLAYING() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.HUMAN);
-        everCharacter.setWeapon(Enum.Weapon.KNIFEOFOGRESLAYING);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.HUMAN);
+        everCharacter.setWeapon(EverEnum.Weapon.KNIFEOFOGRESLAYING);
 
         //Act
-        Enum.Weapon result = everCharacter.getWeapon();
+        EverEnum.Weapon result = everCharacter.getWeapon();
 
         //Assert
-        assertEquals(Enum.Weapon.NOWEAPON, result);
+        assertEquals(EverEnum.Weapon.NOWEAPON, result);
     }
 }

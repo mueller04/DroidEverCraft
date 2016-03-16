@@ -1,5 +1,6 @@
+package com.example.mike.droidevercraft;
+
 import org.junit.Test;
-import com.example.mike.droidevercraft.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,8 +11,8 @@ public class ArmorTest {
     @Test
     public void leatherArmorAdds2ToArmor() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setArmor(Enum.Armor.LEATHER);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setArmor(EverEnum.Armor.LEATHER);
 
         //Act
         int result = everCharacter.getModifiedArmor();
@@ -23,49 +24,49 @@ public class ArmorTest {
     @Test
     public void defaultArmorIsNone() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
 
         //Act
-        Enum.Armor result = everCharacter.getArmor();
+        EverEnum.Armor result = everCharacter.getArmor();
 
         //Assert
-        assertEquals(Enum.Armor.NONE, result);
+        assertEquals(EverEnum.Armor.NONE, result);
     }
 
     @Test
     public void onlyDwarfsCanWearPlateArmor() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.DWARF);
-        everCharacter.setArmor(Enum.Armor.PLATE);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.DWARF);
+        everCharacter.setArmor(EverEnum.Armor.PLATE);
 
         //Act
-        Enum.Armor result = everCharacter.getArmor();
+        EverEnum.Armor result = everCharacter.getArmor();
 
         //Assert
-        assertEquals(Enum.Armor.PLATE, result);
+        assertEquals(EverEnum.Armor.PLATE, result);
     }
 
     @Test
     public void ElvesCannotWearPlateArmor() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.ELF);
-        everCharacter.setArmor(Enum.Armor.PLATE);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.ELF);
+        everCharacter.setArmor(EverEnum.Armor.PLATE);
 
         //Act
-        Enum.Armor result = everCharacter.getArmor();
+        EverEnum.Armor result = everCharacter.getArmor();
 
         //Assert
-        assertEquals(Enum.Armor.NONE, result);
+        assertEquals(EverEnum.Armor.NONE, result);
     }
 
     @Test
     public void plateArmorAdds8ToArmor() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.DWARF);
-        everCharacter.setArmor(Enum.Armor.PLATE);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.DWARF);
+        everCharacter.setArmor(EverEnum.Armor.PLATE);
 
         //Act
         int result = everCharacter.getModifiedArmor();
@@ -77,9 +78,9 @@ public class ArmorTest {
     @Test
     public void chainMailArmorAdds5ToArmor() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.DWARF);
-        everCharacter.setArmor(Enum.Armor.CHAINMAIL);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.DWARF);
+        everCharacter.setArmor(EverEnum.Armor.CHAINMAIL);
 
         //Act
         int result = everCharacter.getModifiedArmor();
@@ -91,9 +92,9 @@ public class ArmorTest {
     @Test
     public void chainMailArmorAdds8ToElfsArmor() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.ELF);
-        everCharacter.setArmor(Enum.Armor.CHAINMAIL);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.ELF);
+        everCharacter.setArmor(EverEnum.Armor.CHAINMAIL);
 
         //Act
         int result = everCharacter.getModifiedArmor();
@@ -105,9 +106,9 @@ public class ArmorTest {
     @Test
     public void chainMailArmorAdds1ToElfsAttack() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.ELF);
-        everCharacter.setArmor(Enum.Armor.CHAINMAIL);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.ELF);
+        everCharacter.setArmor(EverEnum.Armor.CHAINMAIL);
 
         //Act
         int result = everCharacter.calculateHitPointsAndAttackStrength(false);
@@ -119,9 +120,9 @@ public class ArmorTest {
     @Test
     public void sheildAdds3ToArmor() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.HUMAN);
-        everCharacter.setArmor(Enum.Armor.SHIELD);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.HUMAN);
+        everCharacter.setArmor(EverEnum.Armor.SHIELD);
 
         //Act
         int result = everCharacter.getModifiedArmor();
@@ -133,9 +134,9 @@ public class ArmorTest {
     @Test
     public void sheildPenaltyOf3ToAttackModifier() {
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.HUMAN);
-        everCharacter.setArmor(Enum.Armor.SHIELD);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.HUMAN);
+        everCharacter.setArmor(EverEnum.Armor.SHIELD);
 
         //Act
         int result = everCharacter.getModifiedRollNumber(10);

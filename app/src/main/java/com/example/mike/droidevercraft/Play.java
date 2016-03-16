@@ -46,32 +46,32 @@ public class Play {
     }
 
     private void setCharacterClassAbilities(EverCraftCharacter defendingCharacter, EverCraftCharacter attackingCharacter){
-        if (defendingCharacter.getCharacterClass() == Enum.CharacterClassEnum.DEFENDER){
+        if (defendingCharacter.getCharacterClass() == EverEnum.CharacterClassEnum.DEFENDER){
             attackingCharacter.getAbilities().setStrengthScore(10);
         }
 
-        if (attackingCharacter.getCharacterClass() == Enum.CharacterClassEnum.WARLORD){
+        if (attackingCharacter.getCharacterClass() == EverEnum.CharacterClassEnum.WARLORD){
             defendingCharacter.getAbilities().setDexterityScore(10);
         }
 
-        if (attackingCharacter.getCharacterClass() == Enum.CharacterClassEnum.ROGUE
-                && defendingCharacter.getAlignment() == Enum.Alignment.Evil) {
+        if (attackingCharacter.getCharacterClass() == EverEnum.CharacterClassEnum.ROGUE
+                && defendingCharacter.getAlignment() == EverEnum.Alignment.Evil) {
             attackingCharacter.setRogueHitAgainstEvilFlag();
         }
 
-        if (attackingCharacter.getRace() == Enum.RaceEnum.DWARF
-                && defendingCharacter.getRace() == Enum.RaceEnum.ORC) {
+        if (attackingCharacter.getRace() == EverEnum.RaceEnum.DWARF
+                && defendingCharacter.getRace() == EverEnum.RaceEnum.ORC) {
             attackingCharacter.setDwarfHitAgainstOrcFlag();
         }
 
-        if (attackingCharacter.getRace() != Enum.RaceEnum.HALFLING
-                && defendingCharacter.getRace() == Enum.RaceEnum.HALFLING) {
+        if (attackingCharacter.getRace() != EverEnum.RaceEnum.HALFLING
+                && defendingCharacter.getRace() == EverEnum.RaceEnum.HALFLING) {
             defendingCharacter.setHalflingIncreasedArmorFlag();
         }
     }
 
     private void setWeaponAbilities(EverCraftCharacter defendingCharacter, EverCraftCharacter attackingCharacter){
-        if (attackingCharacter.getWeapon() == Enum.Weapon.LONGSWORD && defendingCharacter.getRace() == Enum.RaceEnum.ORC){
+        if (attackingCharacter.getWeapon() == EverEnum.Weapon.LONGSWORD && defendingCharacter.getRace() == EverEnum.RaceEnum.ORC){
             attackingCharacter.setWarAxeAgainstOrcFlag();
         }
 

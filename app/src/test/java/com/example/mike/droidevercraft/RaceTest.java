@@ -1,5 +1,4 @@
-import com.example.mike.droidevercraft.yay.*;
-import com.example.mike.droidevercraft.yay.Enum;
+package com.example.mike.droidevercraft;
 
 import org.junit.Test;
 
@@ -16,8 +15,8 @@ public class RaceTest {
     @Test
     public void orcIncreasesHitPointsBy2(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", com.example.mike.droidevercraft.yay.Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.ORC);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.ORC);
 
         //Act
         int result = everCharacter.calculateHitPointsAndAttackStrength(false);
@@ -29,8 +28,8 @@ public class RaceTest {
     @Test
     public void orcIncreasesArmorBy2(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.ORC);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.ORC);
 
 
         //Act
@@ -43,8 +42,8 @@ public class RaceTest {
     @Test
     public void dwarfIncreasesConstitutionModifierBy1(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.DWARF);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.DWARF);
         everCharacter.getAbilities().setConstitutionScore(20);
 
         //Act
@@ -57,8 +56,8 @@ public class RaceTest {
     @Test
         public void dwarfDoublesConstitutionModifierPerLevelNonWarlord(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.DWARF);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.DWARF);
         everCharacter.getAbilities().setConstitutionScore(20);
 
         //Act
@@ -71,8 +70,8 @@ public class RaceTest {
     @Test
     public void elfSubtractsFrom1ToConstitutionModifier(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.ELF);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.ELF);
         everCharacter.getAbilities().setConstitutionScore(20);
 
         //Act
@@ -85,8 +84,8 @@ public class RaceTest {
     @Test
     public void elfAdds1ToDexterityModifier(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.ELF);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.ELF);
 
         //Act
         int result = everCharacter.getModifiedArmor();
@@ -98,8 +97,8 @@ public class RaceTest {
     @Test
     public void nonElfReturns0ForCriticalRange(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.DWARF);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.DWARF);
 
         //Act
         int result = everCharacter.getCriticalRange();
@@ -111,8 +110,8 @@ public class RaceTest {
     @Test
     public void elfReturns1ForCriticalRange(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.ELF);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.ELF);
 
         //Act
         int result = everCharacter.getCriticalRange();
@@ -124,8 +123,8 @@ public class RaceTest {
     @Test
     public void halflingAdds1ToDexterityModifier(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.HALFLING);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.HALFLING);
 
         //Act
         int result = everCharacter.getModifiedArmor();
@@ -137,8 +136,8 @@ public class RaceTest {
     @Test
     public void halflingSubtracts1FromStrengthModifier(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Good);
-        everCharacter.setRace(Enum.RaceEnum.HALFLING);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.HALFLING);
 
         //Act
         int result = everCharacter.calculateStrengthModifier(false);
@@ -150,10 +149,10 @@ public class RaceTest {
     @Test
     public void halflingAlignmentCannotBeEvil(){
         //Arrange
-        everCharacter = new EverCraftCharacter("Example Name", Enum.Alignment.Evil);
+        everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Evil);
         try {
             //Act
-            everCharacter.setRace(Enum.RaceEnum.HALFLING);
+            everCharacter.setRace(EverEnum.RaceEnum.HALFLING);
         } catch (Exception e) {
             //Assert
             assertEquals(e.getMessage(), "Halfling cannot have evil alignment");

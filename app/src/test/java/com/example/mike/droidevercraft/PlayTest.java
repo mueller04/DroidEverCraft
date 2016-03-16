@@ -1,5 +1,4 @@
-import com.example.mike.droidevercraft.yay.*;
-import com.example.mike.droidevercraft.yay.Enum;
+package com.example.mike.droidevercraft;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -144,8 +143,8 @@ public class PlayTest {
     @Test
     public void attackingCharWeaponWarAxeAgainstOrcCallsAttackAgainstOrcFlag(){
         //Arrange
-        Mockito.when(mockAttackingChar.getWeapon()).thenReturn(com.example.mike.droidevercraft.yay.Enum.Weapon.LONGSWORD);
-        Mockito.when(mockDefendingChar.getRace()).thenReturn(Enum.RaceEnum.ORC);
+        Mockito.when(mockAttackingChar.getWeapon()).thenReturn(com.example.mike.droidevercraft.EverEnum.Weapon.LONGSWORD);
+        Mockito.when(mockDefendingChar.getRace()).thenReturn(EverEnum.RaceEnum.ORC);
         Mockito.when(mockDefendingChar.getModifiedArmor()).thenReturn(10);
         Mockito.when(mockAttackingChar.getModifiedRollNumber(anyInt())).thenReturn(10);
 

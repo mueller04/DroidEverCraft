@@ -1,4 +1,4 @@
-import com.example.mike.droidevercraft.yay.Abilities;
+package com.example.mike.droidevercraft;
 
 import org.junit.Test;
 

@@ -3,15 +3,15 @@ package com.example.mike.droidevercraft;
 public class EverCraftCharacter {
 
     private String name;
-    private Enum.Weapon weapon = Enum.Weapon.NOWEAPON;
-    private Enum.Alignment alignment;
-    private Enum.LifeStatus lifeStatus;
+    private EverEnum.Weapon weapon = EverEnum.Weapon.NOWEAPON;
+    private EverEnum.Alignment alignment;
+    private EverEnum.LifeStatus lifeStatus;
     private int experiencePoints = 0;
     private int hitPoints = 5;
     private Abilities abilities;
-    private Enum.CharacterClassEnum characterClassEnum;
-    private Enum.RaceEnum raceEnum;
-    private Enum.Armor armorEnum = Enum.Armor.NONE;
+    private EverEnum.CharacterClassEnum characterClassEnum;
+    private EverEnum.RaceEnum raceEnum;
+    private EverEnum.Armor armorEnum = EverEnum.Armor.NONE;
 
     //Class Related
     private boolean rogueHitAgainstEvilFlag = false;
@@ -23,21 +23,21 @@ public class EverCraftCharacter {
     //Weapon Related
     private boolean warAxeAgainstOrcFlag = false;
 
-    public EverCraftCharacter(String name, Enum.Alignment alignment){
+    public EverCraftCharacter(String name, EverEnum.Alignment alignment){
         this.name = name;
         this.alignment = alignment;
-        this.lifeStatus = Enum.LifeStatus.Alive;
+        this.lifeStatus = EverEnum.LifeStatus.Alive;
         this.abilities = new Abilities();
-        this.characterClassEnum = Enum.CharacterClassEnum.DEFAULT;
-        this.raceEnum = Enum.RaceEnum.HUMAN;
+        this.characterClassEnum = EverEnum.CharacterClassEnum.DEFAULT;
+        this.raceEnum = EverEnum.RaceEnum.HUMAN;
     }
 
-    public void setCharacterClass(Enum.CharacterClassEnum characterClass){
-        if (alignment == Enum.Alignment.Evil && characterClass == Enum.CharacterClassEnum.DEFENDER) {
+    public void setCharacterClass(EverEnum.CharacterClassEnum characterClass){
+        if (alignment == EverEnum.Alignment.Evil && characterClass == EverEnum.CharacterClassEnum.DEFENDER) {
             throw new IllegalArgumentException("Defender Class cannot have evil alignment");
-        } else if (alignment == Enum.Alignment.Good && characterClass == Enum.CharacterClassEnum.WARLORD) {
+        } else if (alignment == EverEnum.Alignment.Good && characterClass == EverEnum.CharacterClassEnum.WARLORD) {
             throw new IllegalArgumentException("Warlord Class cannot have good alignment");
-        } else if ((alignment == Enum.Alignment.Good || alignment == Enum.Alignment.Evil) && characterClass == Enum.CharacterClassEnum.ROGUE) {
+        } else if ((alignment == EverEnum.Alignment.Good || alignment == EverEnum.Alignment.Evil) && characterClass == EverEnum.CharacterClassEnum.ROGUE) {
             throw new IllegalArgumentException("Rogue Class cannot have good or evil alignment");
         } else {
             this.characterClassEnum = characterClass;
@@ -45,15 +45,15 @@ public class EverCraftCharacter {
         }
     }
 
-    public void setRace(Enum.RaceEnum raceEnum) {
-        if (alignment == Enum.Alignment.Evil && raceEnum == Enum.RaceEnum.HALFLING) {
+    public void setRace(EverEnum.RaceEnum raceEnum) {
+        if (alignment == EverEnum.Alignment.Evil && raceEnum == EverEnum.RaceEnum.HALFLING) {
             throw new IllegalArgumentException("Halfling cannot have evil alignment");
         }
         this.raceEnum = raceEnum;
     }
 
     private void setClassModifiers(){
-        if (characterClassEnum == Enum.CharacterClassEnum.DEFENDER) {
+        if (characterClassEnum == EverEnum.CharacterClassEnum.DEFENDER) {
             hitPoints *= 2;
         }
 
@@ -61,34 +61,34 @@ public class EverCraftCharacter {
 
     public void updateLifeStatus(){
         if (this.getHitPoints() <= 0){
-            this.setLifeStatus(Enum.LifeStatus.Dead);
+            this.setLifeStatus(EverEnum.LifeStatus.Dead);
         }
     }
 
     public int getModifiedArmor(){
         int armor = 10;
 
-        if (raceEnum == Enum.RaceEnum.ORC || halflingIncreasedArmorFlag){
+        if (raceEnum == EverEnum.RaceEnum.ORC || halflingIncreasedArmorFlag){
             armor += 2;
         }
 
-        if (armorEnum ==Enum.Armor.LEATHER){
+        if (armorEnum == EverEnum.Armor.LEATHER){
             armor += 2;
         }
 
-        if (armorEnum == Enum.Armor.PLATE){
+        if (armorEnum == EverEnum.Armor.PLATE){
             armor += 8;
         }
 
-        if (armorEnum == Enum.Armor.CHAINMAIL){
+        if (armorEnum == EverEnum.Armor.CHAINMAIL){
             armor += 5;
         }
 
-        if (armorEnum == Enum.Armor.SHIELD){
+        if (armorEnum == EverEnum.Armor.SHIELD){
             armor += 3;
         }
 
-        if (armorEnum == Enum.Armor.CHAINMAIL && raceEnum == Enum.RaceEnum.ELF){
+        if (armorEnum == EverEnum.Armor.CHAINMAIL && raceEnum == EverEnum.RaceEnum.ELF){
             armor += 3;
         }
 
@@ -103,12 +103,12 @@ public class EverCraftCharacter {
         int dexterityScore = abilities.getDexterityScore();
         int dexterityModifier = abilities.getDexterityModifier(dexterityScore);
 
-        if (characterClassEnum == Enum.CharacterClassEnum.DEFENDER){
+        if (characterClassEnum == EverEnum.CharacterClassEnum.DEFENDER){
             if (dexterityModifier >= 0) {
                 dexterityModifier *=2;
             }
         }
-        if (raceEnum == Enum.RaceEnum.ELF || raceEnum == Enum.RaceEnum.HALFLING) {
+        if (raceEnum == EverEnum.RaceEnum.ELF || raceEnum == EverEnum.RaceEnum.HALFLING) {
             dexterityModifier += 1;
         }
         return dexterityModifier;
@@ -116,7 +116,7 @@ public class EverCraftCharacter {
 
     private int calculcateWisdomModifier() {
         int value = 0;
-        if (characterClassEnum == Enum.CharacterClassEnum.MONK){
+        if (characterClassEnum == EverEnum.CharacterClassEnum.MONK){
             int wisdomScore = abilities.getWisdomScore();
             int wisdomModifier = abilities.getWisdomModifier(wisdomScore);
             if (wisdomModifier > 0) {
@@ -130,16 +130,16 @@ public class EverCraftCharacter {
         int strengthScore = this.getAbilities().getStrengthScore();
         int strengthModifier = this.getAbilities().getStrengthModifier(strengthScore);
 
-        if (weapon == Enum.Weapon.WARAXE ||
-                (weapon == Enum.Weapon.LONGSWORD && raceEnum == Enum.RaceEnum.ELF) ){
+        if (weapon == EverEnum.Weapon.WARAXE ||
+                (weapon == EverEnum.Weapon.LONGSWORD && raceEnum == EverEnum.RaceEnum.ELF) ){
             rollNumber += 2;
         }
 
-        if (weapon == Enum.Weapon.NUNCHUCKS && characterClassEnum != Enum.CharacterClassEnum.MONK){
+        if (weapon == EverEnum.Weapon.NUNCHUCKS && characterClassEnum != EverEnum.CharacterClassEnum.MONK){
             rollNumber -= 4;
         }
 
-        if (armorEnum == Enum.Armor.SHIELD){
+        if (armorEnum == EverEnum.Armor.SHIELD){
             rollNumber -= 3;
         }
 
@@ -173,7 +173,7 @@ public class EverCraftCharacter {
 
     private int raceAttackModifier(){
         int modifiedAttackScore = 0;
-        if (raceEnum == Enum.RaceEnum.ORC) {
+        if (raceEnum == EverEnum.RaceEnum.ORC) {
             modifiedAttackScore += 2;
         }
         if (rogueHitAgainstEvilFlag) {
@@ -182,14 +182,14 @@ public class EverCraftCharacter {
         if (dwarfHitAgainstOrcFlag) {
             modifiedAttackScore += 2;
         }
-        if (armorEnum == Enum.Armor.CHAINMAIL && raceEnum == Enum.RaceEnum.ELF){
+        if (armorEnum == EverEnum.Armor.CHAINMAIL && raceEnum == EverEnum.RaceEnum.ELF){
             modifiedAttackScore += 1;
         }
         return modifiedAttackScore;
     }
 
     private int calculateStandardAttack(){
-        if (characterClassEnum == Enum.CharacterClassEnum.MONK) {
+        if (characterClassEnum == EverEnum.CharacterClassEnum.MONK) {
             return 3;
         } else {
             return 1;
@@ -198,28 +198,28 @@ public class EverCraftCharacter {
 
     private int calculateWeaponAttack(){
         int weaponAttack = 0;
-        if (weapon == Enum.Weapon.DAGGER) {
+        if (weapon == EverEnum.Weapon.DAGGER) {
             weaponAttack += 1;
         }
-        if (weapon == Enum.Weapon.LONGSWORD && raceEnum == Enum.RaceEnum.ELF){
+        if (weapon == EverEnum.Weapon.LONGSWORD && raceEnum == EverEnum.RaceEnum.ELF){
             weaponAttack += 2;
         }
-        if (weapon == Enum.Weapon.LONGSWORD) {
+        if (weapon == EverEnum.Weapon.LONGSWORD) {
             weaponAttack += 5;
         }
-        if (weapon == Enum.Weapon.WARAXE) {
+        if (weapon == EverEnum.Weapon.WARAXE) {
             weaponAttack += 2;
         }
-        if (raceEnum == Enum.RaceEnum.ELF && warAxeAgainstOrcFlag){
+        if (raceEnum == EverEnum.RaceEnum.ELF && warAxeAgainstOrcFlag){
             weaponAttack += 5;
         } else if (warAxeAgainstOrcFlag){
             weaponAttack += 2;
         }
-        if (weapon == Enum.Weapon.NUNCHUCKS) {
+        if (weapon == EverEnum.Weapon.NUNCHUCKS) {
             weaponAttack += 6;
         }
 
-        if (weapon == Enum.Weapon.KNIFEOFOGRESLAYING) {
+        if (weapon == EverEnum.Weapon.KNIFEOFOGRESLAYING) {
             weaponAttack += 10;
         }
 
@@ -229,10 +229,10 @@ public class EverCraftCharacter {
     public int calculateStrengthModifier(boolean isCritical){
         int strengthModifier = 0;
 
-        if (characterClassEnum == Enum.CharacterClassEnum.ROGUE) {
+        if (characterClassEnum == EverEnum.CharacterClassEnum.ROGUE) {
             int dexterityScore = this.getAbilities().getDexterityScore();
             strengthModifier = this.getAbilities().getDexterityModifier(dexterityScore);
-        } else if (characterClassEnum == Enum.CharacterClassEnum.WARLORD) {
+        } else if (characterClassEnum == EverEnum.CharacterClassEnum.WARLORD) {
             int strengthScore = this.getAbilities().getStrengthScore();
             strengthModifier = (this.getAbilities().getStrengthModifier(strengthScore) * 2);
         } else {
@@ -240,7 +240,7 @@ public class EverCraftCharacter {
             strengthModifier = this.getAbilities().getStrengthModifier(strengthScore);
         }
 
-        if (raceEnum == Enum.RaceEnum.HALFLING){
+        if (raceEnum == EverEnum.RaceEnum.HALFLING){
             strengthModifier -= 1;
         }
 
@@ -252,13 +252,13 @@ public class EverCraftCharacter {
 
     private int criticalHit(){
         int value = 0;
-        if (characterClassEnum == Enum.CharacterClassEnum.WARLORD || rogueHitAgainstEvilFlag) {
+        if (characterClassEnum == EverEnum.CharacterClassEnum.WARLORD || rogueHitAgainstEvilFlag) {
             value += 3;
         }
 
-        if (weapon == Enum.Weapon.WARAXE && characterClassEnum == Enum.CharacterClassEnum.ROGUE){
+        if (weapon == EverEnum.Weapon.WARAXE && characterClassEnum == EverEnum.CharacterClassEnum.ROGUE){
             value += 4;
-        } else if (weapon == Enum.Weapon.WARAXE) {
+        } else if (weapon == EverEnum.Weapon.WARAXE) {
             value += 3;
         }
 
@@ -297,7 +297,7 @@ public class EverCraftCharacter {
         hitPoints += constitutionModifier;
 
         for (int i = 1; i < level; i++) {
-            if (characterClassEnum == Enum.CharacterClassEnum.WARLORD) {
+            if (characterClassEnum == EverEnum.CharacterClassEnum.WARLORD) {
                 hitPoints += calculateLevelUpConstitutionModifier(6, constitutionModifier);
             } else {
                 hitPoints += calculateLevelUpConstitutionModifier(5, constitutionModifier);
@@ -310,7 +310,7 @@ public class EverCraftCharacter {
 
 
     private int calculateLevelUpConstitutionModifier(int base, int constitutionModifier){
-        if (raceEnum == Enum.RaceEnum.DWARF){
+        if (raceEnum == EverEnum.RaceEnum.DWARF){
             return (base + (constitutionModifier * 2));
         } else {
             return (base + constitutionModifier);
@@ -319,9 +319,9 @@ public class EverCraftCharacter {
 
 
     private int calculateRaceConsitutionModifier(int constitutionModifier) {
-        if (raceEnum == Enum.RaceEnum.DWARF) {
+        if (raceEnum == EverEnum.RaceEnum.DWARF) {
             return constitutionModifier += 1;
-        } else if (raceEnum == Enum.RaceEnum.ELF) {
+        } else if (raceEnum == EverEnum.RaceEnum.ELF) {
             return constitutionModifier -= 1;
         } else {
             return constitutionModifier;
@@ -338,10 +338,10 @@ public class EverCraftCharacter {
 
     public int getCriticalRange(){
         int value = 0;
-        if (raceEnum == Enum.RaceEnum.ELF){
+        if (raceEnum == EverEnum.RaceEnum.ELF){
             value += 1;
         }
-        if (characterClassEnum == Enum.CharacterClassEnum.WARLORD){
+        if (characterClassEnum == EverEnum.CharacterClassEnum.WARLORD){
             value += 2;
         }
         return value;
@@ -363,19 +363,19 @@ public class EverCraftCharacter {
         this.name = name;
     }
 
-    public Enum.Alignment getAlignment(){
+    public EverEnum.Alignment getAlignment(){
         return alignment;
     }
 
-    public void setAlignment(Enum.Alignment alignment){
+    public void setAlignment(EverEnum.Alignment alignment){
         this.alignment = alignment;
     }
 
-    public Enum.LifeStatus getLifeStatus(){
+    public EverEnum.LifeStatus getLifeStatus(){
         return lifeStatus;
     }
 
-    public void setLifeStatus(Enum.LifeStatus lifeStatus){
+    public void setLifeStatus(EverEnum.LifeStatus lifeStatus){
         this.lifeStatus = lifeStatus;
     }
 
@@ -393,9 +393,9 @@ public class EverCraftCharacter {
         this.hitPoints = hitPoints;
     }
 
-    public Enum.CharacterClassEnum getCharacterClass() { return characterClassEnum; }
+    public EverEnum.CharacterClassEnum getCharacterClass() { return characterClassEnum; }
 
-    public Enum.RaceEnum getRace() { return raceEnum; }
+    public EverEnum.RaceEnum getRace() { return raceEnum; }
 
     public void setRogueHitAgainstEvilFlag() { rogueHitAgainstEvilFlag = true; }
 
@@ -403,12 +403,12 @@ public class EverCraftCharacter {
 
     public void setHalflingIncreasedArmorFlag() { this.halflingIncreasedArmorFlag = true; }
 
-    public Enum.Weapon getWeapon(){
+    public EverEnum.Weapon getWeapon(){
         return weapon;
     }
 
-    public void setWeapon(Enum.Weapon weapon){
-        if (raceEnum == Enum.RaceEnum.HUMAN && weapon == Enum.Weapon.KNIFEOFOGRESLAYING){
+    public void setWeapon(EverEnum.Weapon weapon){
+        if (raceEnum == EverEnum.RaceEnum.HUMAN && weapon == EverEnum.Weapon.KNIFEOFOGRESLAYING){
             //DO NOTHING
         } else {
             this.weapon = weapon;
@@ -419,12 +419,12 @@ public class EverCraftCharacter {
         this.warAxeAgainstOrcFlag = true;
     }
 
-    public Enum.Armor getArmor(){
+    public EverEnum.Armor getArmor(){
         return armorEnum;
     }
 
-    public void setArmor(Enum.Armor armor){
-        if (raceEnum != Enum.RaceEnum.DWARF && armor == Enum.Armor.PLATE){
+    public void setArmor(EverEnum.Armor armor){
+        if (raceEnum != EverEnum.RaceEnum.DWARF && armor == EverEnum.Armor.PLATE){
             //DO NOTHING
         } else {
             this.armorEnum = armor;

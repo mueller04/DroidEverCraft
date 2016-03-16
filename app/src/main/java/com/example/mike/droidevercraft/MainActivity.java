@@ -1,14 +1,11 @@
 package com.example.mike.droidevercraft;
 
 import android.content.Intent;
-import android.media.MediaMetadataRetriever;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
         EditText textInput = (EditText) findViewById(R.id.name_input);
         String nameInputStr = textInput.getText().toString();
-        everChar1 = new EverCraftCharacter(nameInputStr, Enum.Alignment.Good);
-        everChar2 = new EverCraftCharacter("name2", Enum.Alignment.Good);
+        everChar1 = new EverCraftCharacter(nameInputStr, EverEnum.Alignment.Good);
+        everChar2 = new EverCraftCharacter("name2", EverEnum.Alignment.Good);
         int hp = everChar1.getHitPoints();
         String hpStr = Integer.toString(hp);
         Log.d("before", hpStr);
