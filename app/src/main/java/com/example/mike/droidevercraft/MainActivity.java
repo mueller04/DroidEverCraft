@@ -1,5 +1,6 @@
 package com.example.mike.droidevercraft;
 
+import android.content.Intent;
 import android.media.MediaMetadataRetriever;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    public final static String packageName = "com.example.mike.droidevercraft.";
 
     Play play;
     EverCraftCharacter everChar1;
@@ -25,11 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void roll(View view){
+    public void saveCharacter1(View view){
 
         EditText textInput = (EditText) findViewById(R.id.name_input);
-        Editable nameInput = textInput.getText();
-        String nameInputStr = nameInput.toString();
+        String nameInputStr = textInput.getText().toString();
         everChar1 = new EverCraftCharacter(nameInputStr, Enum.Alignment.Good);
         everChar2 = new EverCraftCharacter("name2", Enum.Alignment.Good);
         int hp = everChar1.getHitPoints();
@@ -43,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
         Log.d("after", hpStr);
         String nameStr = everChar1.getName();
         Log.d("name", nameStr);
+    }
+
+    public void goToPlay(View view) {
+        Intent intent = new Intent(this, PlayGame.class);
+        intent.putExtra("characterOne", "hi");
+        startActivity(intent);
     }
 
 
