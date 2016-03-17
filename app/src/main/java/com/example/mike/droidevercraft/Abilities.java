@@ -1,6 +1,8 @@
 package com.example.mike.droidevercraft;
 
-public class Abilities {
+import java.io.Serializable;
+
+public class Abilities implements Serializable {
 
     private MapScoreToModifier strength = new MapScoreToModifier();
     private MapScoreToModifier dexterity = new MapScoreToModifier();

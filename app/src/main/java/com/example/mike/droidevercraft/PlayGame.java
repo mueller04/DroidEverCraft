@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.inputmethod.ExtractedText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 public class PlayGame extends AppCompatActivity {
 
-    Intent intent = getIntent();
+    Gson gs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +23,21 @@ public class PlayGame extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Intent intent = getIntent();
+
+        gs = new Gson();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //String message = intent.getStringExtra("EXTRA_MESSAGE");
 
-        TextView priceTextView = (TextView) findViewById(R.id.activitymain_view);
-        priceTextView.setText("you made it here");
+        String everchar1Serialized = (String)intent.getStringExtra("characterOne");
+        EverCraftCharacter newTest = gs.fromJson(everchar1Serialized, EverCraftCharacter.class);
+//
+       TextView priceTextView = (TextView) findViewById(R.id.activitymain_view);
+
+            priceTextView.setText(newTest.getName());
+
+
     }
 
 }
