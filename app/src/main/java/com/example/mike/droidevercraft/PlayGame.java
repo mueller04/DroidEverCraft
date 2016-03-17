@@ -24,10 +24,10 @@ public class PlayGame extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //String message = intent.getStringExtra("EXTRA_MESSAGE");
+        String message = intent.getStringExtra("characterOne");
 
         TextView priceTextView = (TextView) findViewById(R.id.activitymain_view);
-        priceTextView.setText("you made it here");
+        priceTextView.setText(message);
     }
 
 }
