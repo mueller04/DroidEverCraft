@@ -18,6 +18,12 @@ public class Abilities implements Serializable {
     private int intelligenceScore = 10;
     private int charismaScore = 10;
 
+//    private int testInt;
+//
+//    public int getTestInt(){
+//        return testInt;
+//    }
+
 
     //Getters and Setters
     public int getStrengthModifier(int strengthScore){

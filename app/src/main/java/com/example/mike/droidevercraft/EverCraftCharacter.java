@@ -30,6 +30,7 @@ public class EverCraftCharacter  {
 
 
     public EverCraftCharacter(String name, EverEnum.Alignment alignment){
+        //this.abilities = abilities;
         abilities = new Abilities();
         this.name = name;
         this.alignment = alignment;
@@ -393,6 +394,9 @@ public class EverCraftCharacter  {
     }
 
     public int getHitPoints(){
+        if (hitPoints < 0) {
+            hitPoints = 0;
+        }
         return hitPoints;
     }
 
