@@ -17,6 +17,7 @@ public class PlayTest {
 
     @Before
     public void BeforeMethodClass() {
+
         play = new Play();
         mockDefendingChar = Mockito.mock(EverCraftCharacter.class);
         mockAttackingChar = Mockito.mock(EverCraftCharacter.class);

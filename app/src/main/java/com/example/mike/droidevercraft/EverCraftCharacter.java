@@ -1,6 +1,10 @@
 package com.example.mike.droidevercraft;
 
-public class EverCraftCharacter {
+import com.google.gson.Gson;
+
+import java.io.Serializable;
+
+public class EverCraftCharacter  {
 
     private String name;
     private EverEnum.Weapon weapon = EverEnum.Weapon.NOWEAPON;
@@ -23,7 +27,11 @@ public class EverCraftCharacter {
     //Weapon Related
     private boolean warAxeAgainstOrcFlag = false;
 
+
+
     public EverCraftCharacter(String name, EverEnum.Alignment alignment){
+        //this.abilities = abilities;
+        abilities = new Abilities();
         this.name = name;
         this.alignment = alignment;
         this.lifeStatus = EverEnum.LifeStatus.Alive;
@@ -266,7 +274,7 @@ public class EverCraftCharacter {
             value = 2;
         }
 
-        return value;
+       return value;
     }
 
 
@@ -386,6 +394,9 @@ public class EverCraftCharacter {
     }
 
     public int getHitPoints(){
+        if (hitPoints < 0) {
+            hitPoints = 0;
+        }
         return hitPoints;
     }
 
@@ -413,7 +424,7 @@ public class EverCraftCharacter {
         } else {
             this.weapon = weapon;
         }
-    }
+   }
 
     public void setWarAxeAgainstOrcFlag(){
         this.warAxeAgainstOrcFlag = true;
@@ -426,8 +437,11 @@ public class EverCraftCharacter {
     public void setArmor(EverEnum.Armor armor){
         if (raceEnum != EverEnum.RaceEnum.DWARF && armor == EverEnum.Armor.PLATE){
             //DO NOTHING
-        } else {
+       } else {
             this.armorEnum = armor;
         }
     }
+
+
+
 }

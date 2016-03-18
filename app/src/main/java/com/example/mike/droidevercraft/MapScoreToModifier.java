@@ -1,9 +1,10 @@
 package com.example.mike.droidevercraft;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapScoreToModifier {
+public class MapScoreToModifier implements Serializable {
 
     public Map<Integer,Integer> scoreToModifier = new HashMap<Integer, Integer>();
 

@@ -4,7 +4,7 @@ import java.lang.*;
 
 public class Play {
 
-    public String roll(EverCraftCharacter defendingCharacter, EverCraftCharacter attackingCharacter, int rollNumber){
+    public String roll(EverCraftCharacter defendingCharacter, EverCraftCharacter attackingCharacter, int rollNumber) {
 
         defendingCharacter.calculateHitPointsAndAttackStrength(false);
 
@@ -81,5 +81,6 @@ public class Play {
         defendingCharacter.clearFlags();
         attackingCharacter.clearFlags();
     }
+
 
 }
