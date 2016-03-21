@@ -15,19 +15,18 @@
         android:id="@+id/character1"
         android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
         android:textSize="20dp"
-        android:text="Player One" />
+        android:text="Player One Name" />
 
     <EditText
         android:id="@+id/character1_name_input"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="40dp"
         android:maxLength="20"
         android:inputType="text" />
 
@@ -37,22 +36,22 @@
         android:layout_height="50dp"
         android:minHeight="0dp"
         android:minWidth="0dp"
-        android:text="SaveName1"
+        android:text="Player 1 Advanced Setup"
         android:textSize="20dp"
         android:textColor="@color/white"
         android:background="@color/blue"
-        android:onClick="saveCharacter1"/>
+        android:onClick="goToCharacter1Setup"/>
 
     <TextView
         android:id="@+id/character2"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
         android:textSize="20dp"
-        android:text="Player Two" />
+        android:text="Player Two Name" />
 
     <EditText
         android:id="@+id/character2_name_input"
@@ -68,17 +67,17 @@
         android:layout_height="50dp"
         android:minHeight="0dp"
         android:minWidth="0dp"
-        android:text="SaveName2"
+        android:text="Player 2 Advanced Setup"
         android:textSize="20dp"
         android:background="@color/blue"
         android:textColor="@color/white"
-        android:onClick="saveCharacter2"/>
+        android:onClick="goToCharacter2Setup"/>
 
     <Button
         android:id="@+id/goToPlayButton"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="70dp"
         android:layout_marginBottom="1dp"
         android:minHeight="0dp"
         android:minWidth="0dp"

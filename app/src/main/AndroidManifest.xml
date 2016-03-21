@@ -24,6 +24,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.mike.droidevercraft.MainActivity" />
         </activity>
+        <activity
+            android:name=".CharacterSetup"
+            android:label="@string/title_activity_character_setup"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mike.droidevercraft.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

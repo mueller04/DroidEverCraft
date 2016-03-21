@@ -69,12 +69,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void saveCharacter1(View view){
-        //everChar1 = saveCharacter(textInputOne);
+    public void goToCharacter1Setup(View view){
+        if (!textInputOne.getText().toString().equalsIgnoreCase("")){
+            everChar1.setName(textInputOne.getText().toString());
+        }
+        Intent intent = new Intent(this, CharacterSetup.class);
+        String characterSerialized = gs.toJson(everChar1);
+        intent.putExtra("characterOne", characterSerialized);
+        startActivity(intent);
     }
 
-    public void saveCharacter2(View view){
-        //everChar2 = saveCharacter(textInputTwo);
+    public void goToCharacter2Setup(View view){
+        if (!textInputTwo.getText().toString().equalsIgnoreCase("")){
+            everChar2.setName(textInputTwo.getText().toString());
+        }
+        Intent intent = new Intent(this, CharacterSetup.class);
+        String characterSerialized = gs.toJson(everChar2);
+        intent.putExtra("characterTwo", characterSerialized);
+        startActivity(intent);
     }
 
 
