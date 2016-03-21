@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.ExtractedText;
 import android.widget.TextView;
@@ -55,16 +56,15 @@ public class PlayGame extends AppCompatActivity {
     public void roll(View view){
         String turnSummary;
         String rollTurn;
-        int rollNum = getRollNumber();
 
-        if (turnCounter % 2 == 0){
+        rollDie();
+
+        if (turnCounter % 2 == 0) {
             turnSummary = turnSummary(everChar2);
             rollTurn = rollTurn(everChar1, everChar2);
-            populateRollNumber(rollNum);
         } else {
             turnSummary = turnSummary(everChar1);
             rollTurn = rollTurn(everChar2, everChar1);
-            populateRollNumber(rollNum);
         }
         String detailText = rollTurnDetail();
         hitPointTextView.setText(String.valueOf(rollTurn));
@@ -120,6 +120,11 @@ public class PlayGame extends AppCompatActivity {
         double rollNumber = minimumRoll + Math.random() * 19;
         int returnNumber = (int)Math.round(rollNumber);
         return returnNumber;
+    }
+
+    public void rollDie(){
+        int rollNumber = getRollNumber();
+        populateRollNumber(rollNumber);
     }
 
     public void populateRollNumber(int rollNum){

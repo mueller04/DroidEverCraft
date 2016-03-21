@@ -28,16 +28,19 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="40dp"
-        android:inputType="textMultiLine" />
+        android:maxLength="20"
+        android:inputType="text" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_marginTop="5dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:minHeight="0dp"
         android:minWidth="0dp"
-        android:text="SaveNam1e"
+        android:text="SaveName1"
         android:textSize="20dp"
+        android:textColor="@color/white"
+        android:background="@color/blue"
         android:onClick="saveCharacter1"/>
 
     <TextView
@@ -56,22 +59,27 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:inputType="textMultiLine" />
+        android:maxLength="20"
+        android:inputType="text" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_marginTop="5dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:text="SaveName2"
         android:textSize="20dp"
+        android:background="@color/blue"
+        android:textColor="@color/white"
         android:onClick="saveCharacter2"/>
 
     <Button
+        android:id="@+id/goToPlayButton"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginBottom="30dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="1dp"
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:text="Go To Play"

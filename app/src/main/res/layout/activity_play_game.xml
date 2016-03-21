@@ -51,6 +51,7 @@
         <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginLeft="30dp"
             android:minHeight="0dp"
             android:minWidth="0dp"
             android:text="Roll"
@@ -60,7 +61,7 @@
         <TextView
             android:id="@+id/rollnumber_view"
             android:layout_marginRight="30dp"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:textSize="80dp"
