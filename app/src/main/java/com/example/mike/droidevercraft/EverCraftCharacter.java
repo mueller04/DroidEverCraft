@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class EverCraftCharacter  {
 
     private String name;
+    private int playerNumber;
     private EverEnum.Weapon weapon = EverEnum.Weapon.NOWEAPON;
     private EverEnum.Alignment alignment;
     private EverEnum.LifeStatus lifeStatus;
@@ -440,6 +441,13 @@ public class EverCraftCharacter  {
        } else {
             this.armorEnum = armor;
         }
+    }
+    public int getPlayerNumber(){
+        return playerNumber;
+    }
+
+    public void setPlayerNumber(int playerNumber){
+        this.playerNumber = playerNumber;
     }
 
 

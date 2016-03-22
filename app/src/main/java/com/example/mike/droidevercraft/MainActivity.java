@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         textInputTwo.addTextChangedListener(textWatcher);
         everChar1 = new EverCraftCharacter("Character One", EverEnum.Alignment.Neutral);
         everChar2 = new EverCraftCharacter("Character Two", EverEnum.Alignment.Neutral);
+        everChar1.setPlayerNumber(1);
+        everChar2.setPlayerNumber(2);
     }
 
     public void checkFieldsForEmptyValues(){
@@ -70,22 +72,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToCharacter1Setup(View view){
-        if (!textInputOne.getText().toString().equalsIgnoreCase("")){
-            everChar1.setName(textInputOne.getText().toString());
-        }
-        Intent intent = new Intent(this, CharacterSetup.class);
-        String characterSerialized = gs.toJson(everChar1);
-        intent.putExtra("characterOne", characterSerialized);
-        startActivity(intent);
+        characterSetup(everChar1, textInputOne);
     }
 
     public void goToCharacter2Setup(View view){
-        if (!textInputTwo.getText().toString().equalsIgnoreCase("")){
-            everChar2.setName(textInputTwo.getText().toString());
+        characterSetup(everChar2, textInputTwo);
+    }
+
+    public void characterSetup(EverCraftCharacter everChar, EditText textInput){
+        if (!textInput.getText().toString().equalsIgnoreCase("")){
+            everChar.setName(textInput.getText().toString());
         }
         Intent intent = new Intent(this, CharacterSetup.class);
-        String characterSerialized = gs.toJson(everChar2);
-        intent.putExtra("characterTwo", characterSerialized);
+        String characterSerialized = gs.toJson(everChar);
+        intent.putExtra("characterAny", characterSerialized);
         startActivity(intent);
     }
 
