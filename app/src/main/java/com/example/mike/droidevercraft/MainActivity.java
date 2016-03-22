@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CharacterSetup.class);
         String characterSerialized = gs.toJson(everChar);
         intent.putExtra("characterAny", characterSerialized);
-        startActivity(intent);
+        startActivityForResult(intent, RESULT_OK);
     }
 
 

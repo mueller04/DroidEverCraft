@@ -32,24 +32,15 @@ public class CharacterSetup extends AppCompatActivity {
         gs = new Gson();
         Intent intent = getIntent();
         String evercharSerialized2 = (String)intent.getStringExtra("characterAny");
-
-        //TODO this is null when I select to go to Character Setup Screen
-
-        if (evercharSerialized2 != null){
-            everChar = gs.fromJson(evercharSerialized2, EverCraftCharacter.class);
-        } else {
-            Log.d("null reference", "evercharSerialized is null in CharacterSetup");
-        }
+        everChar = gs.fromJson(evercharSerialized2, EverCraftCharacter.class);
         characterName = (EditText) findViewById(R.id.character_name_input);
-        if (everChar != null){
-            characterName.setText(everChar.getName());
-        } else {
-            characterName.setText("everChar1 is null");
-        }
+        characterName.setText(everChar.getName());
     }
+
 
     @Override
     public void onBackPressed(){
+
         Intent intent = new Intent();
         String characterSerialized = gs.toJson(everChar);
         if (everChar.getPlayerNumber() == 1){
@@ -57,8 +48,9 @@ public class CharacterSetup extends AppCompatActivity {
         } else if (everChar.getPlayerNumber() == 2){
             intent.putExtra("characterTwo", characterSerialized);
         }
-        startActivity(intent);
+        setResult(RESULT_OK, intent);
         super.onBackPressed();
+
 
         //TODO also I will need some kind of lifecycle method that knows we awoke the parent again and transfer the
         //TODO character object back to MainActivity overwriting it's object reference.
