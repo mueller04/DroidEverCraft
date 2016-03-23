@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 
@@ -37,10 +38,16 @@ public class CharacterSetup extends AppCompatActivity {
         characterName.setText(everChar.getName());
     }
 
-
+    //TODO I'm guessing this is for the navigation bar back button..doesn't fire or do anything
     @Override
     public void onBackPressed(){
+        PressBack();
+        //super.onBackPressed();
+    }
 
+    public void PressBack(){
+        //TODO call to another method(s) here that ultimately saves all data on the page
+        everChar.setName(characterName.getText().toString());
         Intent intent = new Intent();
         String characterSerialized = gs.toJson(everChar);
         if (everChar.getPlayerNumber() == 1){
@@ -49,11 +56,16 @@ public class CharacterSetup extends AppCompatActivity {
             intent.putExtra("characterTwo", characterSerialized);
         }
         setResult(RESULT_OK, intent);
-        super.onBackPressed();
-
-
-        //TODO also I will need some kind of lifecycle method that knows we awoke the parent again and transfer the
-        //TODO character object back to MainActivity overwriting it's object reference.
+        finish();
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            PressBack();
+        }
+        return true;
+    }
+
 
 }

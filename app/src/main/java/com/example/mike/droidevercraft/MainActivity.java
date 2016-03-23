@@ -54,10 +54,38 @@ public class MainActivity extends AppCompatActivity {
         textInputTwo = (EditText) findViewById(R.id.character2_name_input);
         textInputOne.addTextChangedListener(textWatcher);
         textInputTwo.addTextChangedListener(textWatcher);
-        everChar1 = new EverCraftCharacter("Character One", EverEnum.Alignment.Neutral);
-        everChar2 = new EverCraftCharacter("Character Two", EverEnum.Alignment.Neutral);
+        everChar1 = new EverCraftCharacter("Player One", EverEnum.Alignment.Neutral);
+        everChar2 = new EverCraftCharacter("Player Two", EverEnum.Alignment.Neutral);
         everChar1.setPlayerNumber(1);
         everChar2.setPlayerNumber(2);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == 200){
+                String evercharSerialized1 = (String)intent.getStringExtra("characterOne");
+                if (evercharSerialized1 == null){
+                    String evercharSerialized2 = (String)intent.getStringExtra("characterTwo");
+                    if (evercharSerialized2 == null){
+                        //DO NOTHING
+                    } else {
+                        everChar2 = gs.fromJson(evercharSerialized2, EverCraftCharacter.class);
+                    }
+                } else {
+                    everChar1 = gs.fromJson(evercharSerialized1, EverCraftCharacter.class);
+                }
+            setEditTextFields();
+        }
+    }
+
+    private void setEditTextFields(){
+        if (everChar1.getName() != "Player One"){
+            textInputOne.setText(everChar1.getName());
+        }
+        if (everChar2.getName() != "Player Two"){
+            textInputTwo.setText(everChar2.getName());
+        }
     }
 
     public void checkFieldsForEmptyValues(){
@@ -86,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CharacterSetup.class);
         String characterSerialized = gs.toJson(everChar);
         intent.putExtra("characterAny", characterSerialized);
-        startActivityForResult(intent, RESULT_OK);
+        startActivityForResult(intent, 200);
     }
 
 
