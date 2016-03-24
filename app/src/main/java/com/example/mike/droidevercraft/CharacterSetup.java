@@ -25,10 +25,10 @@ public class CharacterSetup extends AppCompatActivity {
     EverCraftCharacter everChar;
     private EditText characterName;
     private int raceEnumIndex;
+    private int classEnumIndex;
+    private int alignmentEnumIndex;
 
-    private Spinner raceSpinner;
 
-    private ArrayList<EverEnum.RaceEnum> raceSpinnerOptions;
 
 
     @Override
@@ -47,13 +47,14 @@ public class CharacterSetup extends AppCompatActivity {
         characterName.setText(everChar.getName());
 
 
-
         createRaceSpinner();
+        createClassSpinner();
+        createAlignmentSpinner();
     }
 
 
     private void createRaceSpinner(){
-        raceSpinnerOptions = new ArrayList<>();
+        ArrayList<EverEnum.RaceEnum> raceSpinnerOptions = new ArrayList<>();
         int index = 0;
         for (EverEnum.RaceEnum e : EverEnum.RaceEnum.values()){
             raceSpinnerOptions.add(e);
@@ -63,7 +64,7 @@ public class CharacterSetup extends AppCompatActivity {
             index++;
         }
 
-        raceSpinner = (Spinner)findViewById(R.id.race_spinner);
+        Spinner raceSpinner = (Spinner)findViewById(R.id.race_spinner);
         ArrayAdapter<EverEnum.RaceEnum>adapter = new ArrayAdapter<EverEnum.RaceEnum>(CharacterSetup.this,
                 android.R.layout.simple_spinner_item, raceSpinnerOptions);
 
@@ -73,20 +74,79 @@ public class CharacterSetup extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                EverEnum.RaceEnum currentRaceSelection = (EverEnum.RaceEnum)parent.getItemAtPosition(position);
+                EverEnum.RaceEnum currentRaceSelection = (EverEnum.RaceEnum) parent.getItemAtPosition(position);
                 everChar.setRace(currentRaceSelection);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //we aren't even hitting this method, how is this called?  I want it to show the current rance when player hits screen
-
-
             }
         });
-
         raceSpinner.setSelection(raceEnumIndex);
-        Log.d("raceEnumIndex", String.valueOf(raceEnumIndex));
+    }
+
+    private void createClassSpinner(){
+        ArrayList<EverEnum.CharacterClassEnum> classSpinnerOptions = new ArrayList<>();
+        int index = 0;
+        for (EverEnum.CharacterClassEnum e : EverEnum.CharacterClassEnum.values()){
+            classSpinnerOptions.add(e);
+            if (e == everChar.getCharacterClass()){
+                classEnumIndex = index;
+            }
+            index++;
+        }
+
+        Spinner classSpinner = (Spinner)findViewById(R.id.class_spinner);
+        ArrayAdapter<EverEnum.CharacterClassEnum>adapter = new ArrayAdapter<EverEnum.CharacterClassEnum>(CharacterSetup.this,
+                android.R.layout.simple_spinner_item, classSpinnerOptions);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        classSpinner.setAdapter(adapter);
+        classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                EverEnum.CharacterClassEnum currentClassSelection = (EverEnum.CharacterClassEnum) parent.getItemAtPosition(position);
+                everChar.setCharacterClass(currentClassSelection);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        classSpinner.setSelection(classEnumIndex);
+    }
+
+    private void createAlignmentSpinner(){
+        ArrayList<EverEnum.Alignment> alignmentSpinnerOptions = new ArrayList<>();
+        int index = 0;
+        for (EverEnum.Alignment e : EverEnum.Alignment.values()){
+            alignmentSpinnerOptions.add(e);
+            if (e == everChar.getAlignment()){
+                alignmentEnumIndex = index;
+            }
+            index++;
+        }
+
+        Spinner classSpinner = (Spinner)findViewById(R.id.alignment_spinner);
+        ArrayAdapter<EverEnum.Alignment>adapter = new ArrayAdapter<EverEnum.Alignment>(CharacterSetup.this,
+                android.R.layout.simple_spinner_item, alignmentSpinnerOptions);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        classSpinner.setAdapter(adapter);
+        classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                EverEnum.Alignment currentAlignmentSelection = (EverEnum.Alignment) parent.getItemAtPosition(position);
+                everChar.setAlignment(currentAlignmentSelection);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        classSpinner.setSelection(alignmentEnumIndex);
     }
 
     //TODO I'm guessing this is for the navigation bar back button..doesn't fire or do anything
