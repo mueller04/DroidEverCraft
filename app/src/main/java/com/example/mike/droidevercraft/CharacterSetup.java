@@ -27,7 +27,7 @@ public class CharacterSetup extends AppCompatActivity {
     private int raceEnumIndex;
     private int classEnumIndex;
     private int alignmentEnumIndex;
-
+    private int weaponEnumIndex;
 
 
 
@@ -50,6 +50,7 @@ public class CharacterSetup extends AppCompatActivity {
         createRaceSpinner();
         createClassSpinner();
         createAlignmentSpinner();
+        createWeaponSpinner();
     }
 
 
@@ -147,6 +148,38 @@ public class CharacterSetup extends AppCompatActivity {
             }
         });
         classSpinner.setSelection(alignmentEnumIndex);
+    }
+
+    private void createWeaponSpinner(){
+        ArrayList<EverEnum.Weapon> alignmentWeaponOptions = new ArrayList<>();
+        int index = 0;
+        for (EverEnum.Weapon e : EverEnum.Weapon.values()){
+            alignmentWeaponOptions.add(e);
+            if (e == everChar.getWeapon()){
+                weaponEnumIndex = index;
+            }
+            index++;
+        }
+
+        Spinner classSpinner = (Spinner)findViewById(R.id.weapon_spinner);
+        ArrayAdapter<EverEnum.Weapon>adapter = new ArrayAdapter<EverEnum.Weapon>(CharacterSetup.this,
+                android.R.layout.simple_spinner_item, alignmentWeaponOptions);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        classSpinner.setAdapter(adapter);
+        classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                EverEnum.Weapon currentWeaponSelection = (EverEnum.Weapon) parent.getItemAtPosition(position);
+                everChar.setWeapon(currentWeaponSelection);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        classSpinner.setSelection(weaponEnumIndex);
     }
 
     //TODO I'm guessing this is for the navigation bar back button..doesn't fire or do anything

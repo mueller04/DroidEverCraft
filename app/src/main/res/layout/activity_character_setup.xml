@@ -33,6 +33,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -40,9 +41,9 @@
             tools:context="com.example.mike.droidevercraft.MainActivity">
 
             <TextView
-                android:id="@+id/character1"
-                android:layout_marginRight="50dp"
-                android:layout_marginLeft="20dp"
+                android:id="@+id/character_name"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
@@ -63,6 +64,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -70,8 +72,8 @@
 
             <TextView
                 android:id="@+id/race_textview"
-                android:layout_marginRight="50dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
@@ -89,6 +91,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -96,8 +99,8 @@
 
             <TextView
                 android:id="@+id/class_textview"
-                android:layout_marginRight="50dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
@@ -115,6 +118,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -122,8 +126,8 @@
 
             <TextView
                 android:id="@+id/alignment_textview"
-                android:layout_marginRight="50dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
@@ -132,6 +136,33 @@
 
             <Spinner
                 android:id="@+id/alignment_spinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            tools:context="com.example.mike.droidevercraft.MainActivity">
+
+            <TextView
+                android:id="@+id/weapon_textview"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:text="Weapon" />
+
+            <Spinner
+                android:id="@+id/weapon_spinner"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
