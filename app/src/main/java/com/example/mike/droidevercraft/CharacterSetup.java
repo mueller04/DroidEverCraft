@@ -28,7 +28,7 @@ public class CharacterSetup extends AppCompatActivity {
     private int classEnumIndex;
     private int alignmentEnumIndex;
     private int weaponEnumIndex;
-
+    private int armorEnumIndex;
 
 
     @Override
@@ -51,6 +51,7 @@ public class CharacterSetup extends AppCompatActivity {
         createClassSpinner();
         createAlignmentSpinner();
         createWeaponSpinner();
+        createArmorSpinner();
     }
 
 
@@ -180,6 +181,38 @@ public class CharacterSetup extends AppCompatActivity {
             }
         });
         classSpinner.setSelection(weaponEnumIndex);
+    }
+
+    private void createArmorSpinner(){
+        ArrayList<EverEnum.Armor> alignmentArmorOptions = new ArrayList<>();
+        int index = 0;
+        for (EverEnum.Armor e : EverEnum.Armor.values()){
+            alignmentArmorOptions.add(e);
+            if (e == everChar.getArmor()){
+                armorEnumIndex = index;
+            }
+            index++;
+        }
+
+        Spinner classSpinner = (Spinner)findViewById(R.id.armor_spinner);
+        ArrayAdapter<EverEnum.Armor>adapter = new ArrayAdapter<EverEnum.Armor>(CharacterSetup.this,
+                android.R.layout.simple_spinner_item, alignmentArmorOptions);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        classSpinner.setAdapter(adapter);
+        classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                EverEnum.Armor currentArmorSelection = (EverEnum.Armor) parent.getItemAtPosition(position);
+                everChar.setArmor(currentArmorSelection);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        classSpinner.setSelection(armorEnumIndex);
     }
 
     //TODO I'm guessing this is for the navigation bar back button..doesn't fire or do anything
