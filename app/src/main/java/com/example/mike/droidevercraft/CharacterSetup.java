@@ -233,7 +233,6 @@ public class CharacterSetup extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_MENU) {
-            Log.d("TAG", "got to onKeyDown");
             PressBack();
         }
         return true;

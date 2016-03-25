@@ -20,10 +20,14 @@ public class PlayGame extends AppCompatActivity {
     EverCraftCharacter everChar2;
     Play play;
     private int turnCounter;
+    private int initialHitPoints;
     TextView turnTextView;
     TextView rollNumberTextView;
+    TextView summaryTitleTextView;
     TextView hitPointTextView;
-    TextView rollTurnDetailText;
+    TextView rollTurnDetailTextPlayer1;
+    TextView rollTurnDetailTextPlayer2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,27 +53,37 @@ public class PlayGame extends AppCompatActivity {
         turnTextView.setText(String.valueOf(turnSummary));
 
         rollNumberTextView = (TextView) findViewById(R.id.rollnumber_view);
+        summaryTitleTextView = (TextView) findViewById(R.id.playsummarytitle_view);
         hitPointTextView = (TextView) findViewById(R.id.playsummary_view);
-        rollTurnDetailText = (TextView) findViewById(R.id.playerdetail_view);
+        rollTurnDetailTextPlayer1 = (TextView) findViewById(R.id.player1detail_view);
+        rollTurnDetailTextPlayer2 = (TextView) findViewById(R.id.player2detail_view);
     }
 
     public void roll(View view){
         String turnSummary;
-        String rollTurn;
+        String rollTurnSummaryText;
+        String hitPointText;
 
         rollDie();
 
         if (turnCounter % 2 == 0) {
             turnSummary = turnSummary(everChar2);
-            rollTurn = rollTurn(everChar1, everChar2);
+            rollTurnSummaryText = rollTurn(everChar1, everChar2);
+            hitPointText = hitPointText(everChar1, everChar2);
+
         } else {
             turnSummary = turnSummary(everChar1);
-            rollTurn = rollTurn(everChar2, everChar1);
+            rollTurnSummaryText = rollTurn(everChar2, everChar1);
+            hitPointText = hitPointText(everChar2, everChar1);
+
         }
-        String detailText = rollTurnDetail();
-        hitPointTextView.setText(String.valueOf(rollTurn));
-        turnTextView.setText(String.valueOf(turnSummary));
-        rollTurnDetailText.setText(detailText);
+        turnTextView.setText(turnSummary);
+        summaryTitleTextView.setText(rollTurnSummaryText);
+        hitPointTextView.setText((hitPointText));
+        String detailTextPlayer1 = rollTurnDetail(everChar1);
+        String detailTextPlayer2 = rollTurnDetail(everChar2);
+        rollTurnDetailTextPlayer1.setText(detailTextPlayer1);
+        rollTurnDetailTextPlayer2.setText(detailTextPlayer2);
     }
 
     public String turnSummary(EverCraftCharacter attackingChar){
@@ -83,9 +97,13 @@ public class PlayGame extends AppCompatActivity {
     }
 
     public String rollTurn(EverCraftCharacter attackingChar, EverCraftCharacter defendingChar){
-        int initialHitPoints = defendingChar.getHitPoints();
-        play.roll(defendingChar, attackingChar, 20);
-        String summaryText = String.valueOf(attackingChar.getName());
+        initialHitPoints = defendingChar.getHitPoints();
+        String rollResult = play.roll(defendingChar, attackingChar, 20);
+       return rollResult;
+    }
+
+    public String hitPointText(EverCraftCharacter attackingChar, EverCraftCharacter defendingChar){
+        String summaryText = '\n' + String.valueOf(attackingChar.getName());
         summaryText += " attacked ";
         summaryText += String.valueOf(defendingChar.getName());
         summaryText += " causing ";
@@ -94,26 +112,17 @@ public class PlayGame extends AppCompatActivity {
         return summaryText;
     }
 
-    public String rollTurnDetail(){
-
-        String detailText = everChar1.getName();
+    public String rollTurnDetail(EverCraftCharacter everChar){
+        String detailText = everChar.getName();
         detailText += "\n hit points: ";
-        detailText += everChar1.getHitPoints();
+        detailText += everChar.getHitPoints();
         detailText += "\n level: ";
-        detailText += everChar1.getLevel();
+        detailText += everChar.getLevel();
         detailText += "\n armor: ";
-        detailText += everChar1.getArmor();
-
-        detailText += "'\n\n ";
-        detailText += everChar2.getName();
-        detailText += "\n hit points: ";
-        detailText += everChar2.getHitPoints();
-        detailText += "\n level: ";
-        detailText += everChar2.getLevel();
-        detailText += "\n armor: ";
-        detailText += everChar2.getArmor();
+        detailText += everChar.getArmor();
         return detailText;
     }
+
 
     public int getRollNumber(){
         double minimumRoll = 1;

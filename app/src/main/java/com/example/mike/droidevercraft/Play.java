@@ -42,7 +42,7 @@ public class Play {
         int attackStrength = attackingCharacter.calculateHitPointsAndAttackStrength(isCritical(modifiedRollNumber, attackingCharacter));
         defendingCharacter.setHitPoints(defendingCharacter.getHitPoints() - attackStrength);
         defendingCharacter.updateLifeStatus();
-        attackingCharacter.addExperiencePoints(10);
+        attackingCharacter.addExperiencePoints(100);
     }
 
     private void setCharacterClassAbilities(EverCraftCharacter defendingCharacter, EverCraftCharacter attackingCharacter){
