@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -218,12 +220,11 @@ public class CharacterSetup extends AppCompatActivity {
     //TODO I'm guessing this is for the navigation bar back button..doesn't fire or do anything
     @Override
     public void onBackPressed(){
+        super.onBackPressed();
         PressBack();
-        //super.onBackPressed();
     }
 
     public void PressBack(){
-        //TODO call to another method(s) here that ultimately saves all data on the page
         everChar.setName(characterName.getText().toString());
         Intent intent = new Intent();
         String characterSerialized = gs.toJson(everChar);
@@ -238,10 +239,21 @@ public class CharacterSetup extends AppCompatActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
+        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_MENU) {
+            Log.d("TAG", "got to onKeyDown");
             PressBack();
         }
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                PressBack();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
