@@ -80,10 +80,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setEditTextFields(){
-        if (everChar1.getName() != "Player One"){
+        if (!everChar1.getName().equalsIgnoreCase("Player One")){
             textInputOne.setText(everChar1.getName());
         }
-        if (everChar2.getName() != "Player Two"){
+        if (!everChar2.getName().equalsIgnoreCase("Player Two")){
             textInputTwo.setText(everChar2.getName());
         }
     }
@@ -108,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void characterSetup(EverCraftCharacter everChar, EditText textInput){
-        if (!textInput.getText().toString().equalsIgnoreCase("")){
+        if (!textInput.getText().toString().equalsIgnoreCase("Player One")
+                || !textInput.getText().toString().equalsIgnoreCase("Player Two")){
             everChar.setName(textInput.getText().toString());
         }
         Intent intent = new Intent(this, CharacterSetup.class);
