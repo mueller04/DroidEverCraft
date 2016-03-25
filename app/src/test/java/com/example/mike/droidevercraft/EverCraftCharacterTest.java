@@ -286,4 +286,9 @@ public class EverCraftCharacterTest {
         assertEquals(3, result);
     }
 
+    @Test
+    public void beginNextRound(){
+        
+    }
+
 }
