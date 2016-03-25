@@ -217,13 +217,6 @@ public class CharacterSetup extends AppCompatActivity {
         classSpinner.setSelection(armorEnumIndex);
     }
 
-    //TODO I'm guessing this is for the navigation bar back button..doesn't fire or do anything
-    @Override
-    public void onBackPressed(){
-        super.onBackPressed();
-        PressBack();
-    }
-
     public void PressBack(){
         everChar.setName(characterName.getText().toString());
         Intent intent = new Intent();
