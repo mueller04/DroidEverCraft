@@ -9,6 +9,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.ExtractedText;
 import android.widget.TextView;
@@ -199,6 +201,34 @@ public class PlayGame extends AppCompatActivity implements DialogInterface.OnDis
         Log.d("TAG", "OnDismissCalled");
         String turnSummary = turnSummary(everChar1);
         turnTextView.setText(turnSummary);
+    }
+
+    public void PressBack(){
+        Intent intent = new Intent();
+        String characterSerialized1 = gs.toJson(everChar1);
+        String characterSerialized2 = gs.toJson(everChar2);
+        intent.putExtra("characterOne", characterSerialized1);
+        intent.putExtra("characterTwo", characterSerialized2);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_MENU) {
+            PressBack();
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                PressBack();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //Getters and Setters

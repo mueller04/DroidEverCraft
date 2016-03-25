@@ -65,16 +65,13 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == 200){
                 String evercharSerialized1 = (String)intent.getStringExtra("characterOne");
-                if (evercharSerialized1 == null){
-                    String evercharSerialized2 = (String)intent.getStringExtra("characterTwo");
-                    if (evercharSerialized2 == null){
-                        //DO NOTHING
-                    } else {
-                        everChar2 = gs.fromJson(evercharSerialized2, EverCraftCharacter.class);
-                    }
-                } else {
-                    everChar1 = gs.fromJson(evercharSerialized1, EverCraftCharacter.class);
-                }
+                String evercharSerialized2 = (String)intent.getStringExtra("characterTwo");
+            if (evercharSerialized1 != null){
+                everChar1 = gs.fromJson(evercharSerialized1, EverCraftCharacter.class);
+            }
+            if (evercharSerialized2 != null) {
+                everChar2 = gs.fromJson(evercharSerialized2, EverCraftCharacter.class);
+            }
             setEditTextFields();
         }
     }
