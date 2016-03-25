@@ -1,6 +1,7 @@
 package com.example.mike.droidevercraft;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-public class PlayGame extends AppCompatActivity {
+public class PlayGame extends AppCompatActivity implements DialogInterface.OnDismissListener {
 
     Gson gs;
     EverCraftCharacter everChar1;
@@ -28,6 +29,7 @@ public class PlayGame extends AppCompatActivity {
     TextView hitPointTextView;
     TextView rollTurnDetailTextPlayer1;
     TextView rollTurnDetailTextPlayer2;
+    TextView experienceEarnTextView;
     AlertDialog.Builder alertBuilder;
 
 
@@ -54,20 +56,20 @@ public class PlayGame extends AppCompatActivity {
 
         turnTextView = (TextView) findViewById(R.id.turnsummary_view);
         String turnSummary = turnSummary(everChar1);
-        turnTextView.setText(String.valueOf(turnSummary));
+        turnTextView.setText(turnSummary);
 
         rollNumberTextView = (TextView) findViewById(R.id.rollnumber_view);
         summaryTitleTextView = (TextView) findViewById(R.id.playsummarytitle_view);
         hitPointTextView = (TextView) findViewById(R.id.playsummary_view);
         rollTurnDetailTextPlayer1 = (TextView) findViewById(R.id.player1detail_view);
         rollTurnDetailTextPlayer2 = (TextView) findViewById(R.id.player2detail_view);
+        experienceEarnTextView = (TextView) findViewById(R.id.earnexperience_view);
     }
 
     public void roll(View view){
         String turnSummary;
         String rollTurnSummaryText;
         String hitPointText;
-        EverEnum.LifeStatus defendingCharLifeStatus;
 
         rollDie();
 
@@ -91,8 +93,11 @@ public class PlayGame extends AppCompatActivity {
             clearTextViews();
             attackingChar.addExperiencePoints(150);
             showPlayerRoundEndAlert(attackingChar, defendingChar, hitPointText);
+            everChar1.beginNextRound();
+            everChar2.beginNextRound();
         } else {
             setSummaryText(turnSummary, rollTurnSummaryText, hitPointText);
+            experienceEarnTextView.setText("+ 100 XP");
             setDetailText();
         }
     }
@@ -108,13 +113,16 @@ public class PlayGame extends AppCompatActivity {
 
         alertBuilder.setMessage(alertMessage);
         AlertDialog dialog = alertBuilder.create();
+        dialog.setOnDismissListener(this);
         dialog.show();
     }
 
     private void clearTextViews(){
+        turnCounter = 1;
         turnTextView.setText("");
         summaryTitleTextView.setText("");
         hitPointTextView.setText("");
+        experienceEarnTextView.setText("");
         rollTurnDetailTextPlayer1.setText("");
         rollTurnDetailTextPlayer2.setText("");
     }
@@ -155,7 +163,6 @@ public class PlayGame extends AppCompatActivity {
         summaryText += " causing ";
         summaryText += String.valueOf(initialHitPoints - defendingChar.getHitPoints());
         summaryText += " damage";
-        summaryText += "\n + 100 XP";
         return summaryText;
     }
 
@@ -185,6 +192,13 @@ public class PlayGame extends AppCompatActivity {
 
     public void populateRollNumber(int rollNum){
         rollNumberTextView.setText(String.valueOf(rollNum));
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialogInterface){
+        Log.d("TAG", "OnDismissCalled");
+        String turnSummary = turnSummary(everChar1);
+        turnTextView.setText(turnSummary);
     }
 
     //Getters and Setters
