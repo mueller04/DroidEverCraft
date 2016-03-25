@@ -68,7 +68,7 @@ public class PlayTest {
 
 
     @Test
-    public void successfulAttackEarns10ExperiencePoints(){
+    public void successfulAttackEarns100ExperiencePoints(){
         //Arrange
         Mockito.when(mockAttackingChar.getAbilities()).thenReturn(mockAbilities);
         Mockito.when(mockDefendingChar.getModifiedArmor()).thenReturn(10);
@@ -78,7 +78,7 @@ public class PlayTest {
         play.roll(mockDefendingChar, mockAttackingChar, 10);
 
         //Assert
-        verify(mockAttackingChar).addExperiencePoints(10);
+        verify(mockAttackingChar).addExperiencePoints(100);
     }
 
     @Test

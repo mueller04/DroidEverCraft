@@ -288,7 +288,18 @@ public class EverCraftCharacterTest {
 
     @Test
     public void beginNextRound(){
-        
+        //Arrange
+        everCharacter.setHitPoints(0);
+        everCharacter.setLifeStatus(EverEnum.LifeStatus.Dead);
+
+        //Act
+        everCharacter.beginNextRound();
+        EverEnum.LifeStatus expectedLifeStatus = everCharacter.getLifeStatus();
+        int expectedHitPoints = everCharacter.getHitPoints();
+
+        //Assert
+        assertEquals(expectedLifeStatus, EverEnum.LifeStatus.Alive);
+        assertEquals(expectedHitPoints, 5);
     }
 
 }

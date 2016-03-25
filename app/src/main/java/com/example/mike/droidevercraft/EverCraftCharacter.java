@@ -363,6 +363,11 @@ public class EverCraftCharacter  {
         warAxeAgainstOrcFlag = false;
     }
 
+    public void beginNextRound(){
+        setHitPoints(5);
+        setLifeStatus(EverEnum.LifeStatus.Alive);
+    }
+
     //Getters and Setters
     public String getName(){
         return name;

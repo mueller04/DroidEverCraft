@@ -89,6 +89,7 @@ public class PlayGame extends AppCompatActivity {
                                           String turnSummary, String rollTurnSummaryText, String hitPointText){
         if (defendingChar.getLifeStatus() == EverEnum.LifeStatus.Dead){
             clearTextViews();
+            attackingChar.addExperiencePoints(150);
             showPlayerRoundEndAlert(attackingChar, defendingChar, hitPointText);
         } else {
             setSummaryText(turnSummary, rollTurnSummaryText, hitPointText);
@@ -102,7 +103,9 @@ public class PlayGame extends AppCompatActivity {
         alertBuilder.setTitle(alertTitle);
 
         String alertMessage = hitPointText + "\n";
-        alertMessage += defendingChar.getName() + " fell";
+        alertMessage += defendingChar.getName() + " fell!";
+        alertMessage += "\n\n" + attackingChar.getName() + "earned 250 XP";
+
         alertBuilder.setMessage(alertMessage);
         AlertDialog dialog = alertBuilder.create();
         dialog.show();
@@ -152,6 +155,7 @@ public class PlayGame extends AppCompatActivity {
         summaryText += " causing ";
         summaryText += String.valueOf(initialHitPoints - defendingChar.getHitPoints());
         summaryText += " damage";
+        summaryText += "\n + 100 XP";
         return summaryText;
     }
 
