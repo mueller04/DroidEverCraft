@@ -111,7 +111,7 @@ public class CharacterSetup extends AppCompatActivity {
             index++;
         }
 
-        Spinner classSpinner = (Spinner)findViewById(R.id.class_spinner);
+        final Spinner classSpinner = (Spinner)findViewById(R.id.class_spinner);
         ArrayAdapter<EverEnum.CharacterClassEnum>adapter = new ArrayAdapter<EverEnum.CharacterClassEnum>(CharacterSetup.this,
                 android.R.layout.simple_spinner_item, classSpinnerOptions);
 
@@ -122,7 +122,11 @@ public class CharacterSetup extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 EverEnum.CharacterClassEnum currentClassSelection = (EverEnum.CharacterClassEnum) parent.getItemAtPosition(position);
-                everChar.setCharacterClass(currentClassSelection);
+                try {
+                    everChar.setCharacterClass(currentClassSelection);
+                } catch (IllegalArgumentException e) {
+                    ExceptionDialog(e, classSpinner, raceEnumIndex);
+                }
             }
 
             @Override
@@ -143,13 +147,13 @@ public class CharacterSetup extends AppCompatActivity {
             index++;
         }
 
-        final Spinner classSpinner = (Spinner)findViewById(R.id.alignment_spinner);
+        final Spinner alignmentSpinner = (Spinner)findViewById(R.id.alignment_spinner);
         ArrayAdapter<EverEnum.Alignment>adapter = new ArrayAdapter<EverEnum.Alignment>(CharacterSetup.this,
                 android.R.layout.simple_spinner_item, alignmentSpinnerOptions);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        classSpinner.setAdapter(adapter);
-        classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        alignmentSpinner.setAdapter(adapter);
+        alignmentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
@@ -157,7 +161,7 @@ public class CharacterSetup extends AppCompatActivity {
                 try {
                     everChar.setAlignment(currentAlignmentSelection);
                 } catch (IllegalArgumentException e) {
-                    ExceptionDialog(e, classSpinner, alignmentEnumIndex);
+                    ExceptionDialog(e, alignmentSpinner, alignmentEnumIndex);
                 }
             }
 
@@ -165,7 +169,7 @@ public class CharacterSetup extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        classSpinner.setSelection(alignmentEnumIndex);
+        alignmentSpinner.setSelection(alignmentEnumIndex);
     }
 
     private void createWeaponSpinner(){
