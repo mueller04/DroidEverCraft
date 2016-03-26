@@ -1,8 +1,5 @@
 package com.example.mike.droidevercraft;
 
-import android.util.Log;
-
-import com.google.gson.Gson;
 
 public class EverCraftCharacter  {
 
