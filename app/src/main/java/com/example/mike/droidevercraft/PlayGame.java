@@ -66,6 +66,9 @@ public class PlayGame extends AppCompatActivity implements DialogInterface.OnDis
         rollTurnDetailTextPlayer1 = (TextView) findViewById(R.id.player1detail_view);
         rollTurnDetailTextPlayer2 = (TextView) findViewById(R.id.player2detail_view);
         experienceEarnTextView = (TextView) findViewById(R.id.earnexperience_view);
+        Log.d("experience points 1", String.valueOf(everChar1.getExperiencePoints()));
+        Log.d("experience points 2", String.valueOf(everChar2.getExperiencePoints()));
+
     }
 
     public void roll(View view){
@@ -102,6 +105,7 @@ public class PlayGame extends AppCompatActivity implements DialogInterface.OnDis
             experienceEarnTextView.setText("+ 100 XP");
             setDetailText();
         }
+
     }
 
     private void showPlayerRoundEndAlert(EverCraftCharacter attackingChar, EverCraftCharacter defendingChar,
@@ -198,7 +202,6 @@ public class PlayGame extends AppCompatActivity implements DialogInterface.OnDis
 
     @Override
     public void onDismiss(DialogInterface dialogInterface){
-        Log.d("TAG", "OnDismissCalled");
         String turnSummary = turnSummary(everChar1);
         turnTextView.setText(turnSummary);
     }

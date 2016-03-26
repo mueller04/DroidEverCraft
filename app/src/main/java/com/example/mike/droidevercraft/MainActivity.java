@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         String character2Serialized = gs.toJson(everChar2);
         intent.putExtra("characterOne", character1Serialized);
         intent.putExtra("characterTwo", character2Serialized);
-        startActivity(intent);
+        startActivityForResult(intent, 200);
     }
 
 

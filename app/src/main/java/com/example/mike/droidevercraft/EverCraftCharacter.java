@@ -11,7 +11,7 @@ public class EverCraftCharacter  {
     private EverEnum.Weapon weapon = EverEnum.Weapon.NOWEAPON;
     private EverEnum.Alignment alignment;
     private EverEnum.LifeStatus lifeStatus;
-    private int experiencePoints = 0;
+    private int experiencePoints;
     private int hitPoints = 5;
     private Abilities abilities;
     private EverEnum.CharacterClassEnum characterClassEnum;
@@ -394,6 +394,10 @@ public class EverCraftCharacter  {
     }
 
     public Abilities getAbilities() { return abilities; }
+
+    public int getExperiencePoints(){
+        return experiencePoints;
+    }
 
     public void setExperiencePoints(int experiencePoints){
         this.experiencePoints = experiencePoints;
