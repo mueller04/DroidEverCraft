@@ -1,5 +1,6 @@
 package com.example.mike.droidevercraft;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -26,11 +27,14 @@ public class CharacterSetup extends AppCompatActivity {
     Gson gs;
     EverCraftCharacter everChar;
     private EditText characterName;
+    AlertDialog.Builder alertBuilder;
+    AlertDialog dialog;
     private int raceEnumIndex;
     private int classEnumIndex;
     private int alignmentEnumIndex;
     private int weaponEnumIndex;
     private int armorEnumIndex;
+    private EverEnum.RaceEnum raceOnScreenLoad;
 
 
     @Override
@@ -40,6 +44,8 @@ public class CharacterSetup extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder.setTitle("Warning");
 
         gs = new Gson();
         Intent intent = getIntent();
@@ -48,6 +54,7 @@ public class CharacterSetup extends AppCompatActivity {
         characterName = (EditText) findViewById(R.id.character_name_input);
         characterName.setText(everChar.getName());
 
+        raceOnScreenLoad = everChar.getRace();
 
         createRaceSpinner();
         createClassSpinner();
@@ -68,7 +75,7 @@ public class CharacterSetup extends AppCompatActivity {
             index++;
         }
 
-        Spinner raceSpinner = (Spinner)findViewById(R.id.race_spinner);
+        final Spinner raceSpinner = (Spinner)findViewById(R.id.race_spinner);
         ArrayAdapter<EverEnum.RaceEnum>adapter = new ArrayAdapter<EverEnum.RaceEnum>(CharacterSetup.this,
                 android.R.layout.simple_spinner_item, raceSpinnerOptions);
 
@@ -79,7 +86,14 @@ public class CharacterSetup extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 EverEnum.RaceEnum currentRaceSelection = (EverEnum.RaceEnum) parent.getItemAtPosition(position);
-                everChar.setRace(currentRaceSelection);
+                try {
+                    everChar.setRace(currentRaceSelection);
+                } catch (IllegalArgumentException e) {
+                    alertBuilder.setMessage(e.getMessage());
+                    dialog = alertBuilder.create();
+                    raceSpinner.setSelection(raceEnumIndex);
+                    dialog.show();
+                }
             }
 
             @Override
