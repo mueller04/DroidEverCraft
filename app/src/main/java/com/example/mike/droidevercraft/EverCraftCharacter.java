@@ -382,6 +382,9 @@ public class EverCraftCharacter  {
     }
 
     public void setAlignment(EverEnum.Alignment alignment){
+        if (alignment == EverEnum.Alignment.Evil && raceEnum == EverEnum.RaceEnum.HALFLING) {
+            throw new IllegalArgumentException("Halfling cannot have evil alignment");
+        }
         this.alignment = alignment;
     }
 
