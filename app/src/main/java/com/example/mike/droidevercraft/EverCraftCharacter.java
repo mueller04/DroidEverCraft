@@ -359,14 +359,13 @@ public class EverCraftCharacter  {
         return alignment;
     }
 
-    public void setAlignment(EverEnum.Alignment alignment) throws IllegalArgumentException{
-        if (alignment == EverEnum.Alignment.Evil && raceEnum == EverEnum.RaceEnum.HALFLING) {
-            throw new IllegalArgumentException("Halfling cannot have evil alignment");
+    public CharacterSetupRulesReturnObject setAlignment(EverEnum.Alignment alignment) {
+
+        CharacterSetupRulesReturnObject returnRules = CharacterSetupRules.validate(this.armorEnum, this.raceEnum, alignment, this.weapon, this.characterClassEnum);
+        if (returnRules.getIsValid()) {
+            this.alignment = alignment;
         }
-        if (raceEnum == EverEnum.RaceEnum.HUMAN && weapon == EverEnum.Weapon.KNIFEOFOGRESLAYING){
-            throw new IllegalArgumentException("Human cannot use Knife of Ogre Slaying");
-        }
-        this.alignment = alignment;
+        return returnRules;
     }
 
     public EverEnum.LifeStatus getLifeStatus(){
@@ -398,31 +397,25 @@ public class EverCraftCharacter  {
         this.hitPoints = hitPoints;
     }
 
-    public void setCharacterClass(EverEnum.CharacterClassEnum characterClass){
-        if (alignment == EverEnum.Alignment.Evil && characterClass == EverEnum.CharacterClassEnum.DEFENDER) {
-            throw new IllegalArgumentException("Defender Class cannot have evil alignment");
-        } else if (alignment == EverEnum.Alignment.Good && characterClass == EverEnum.CharacterClassEnum.WARLORD) {
-            throw new IllegalArgumentException("Warlord Class cannot have good alignment");
-        } else if ((alignment == EverEnum.Alignment.Good || alignment == EverEnum.Alignment.Evil) && characterClass == EverEnum.CharacterClassEnum.ROGUE) {
-            throw new IllegalArgumentException("Rogue Class cannot have good or evil alignment");
-        } else {
+    public CharacterSetupRulesReturnObject setCharacterClass(EverEnum.CharacterClassEnum characterClass){
+        CharacterSetupRulesReturnObject returnRules = CharacterSetupRules.validate(this.armorEnum, raceEnum, alignment, this.weapon, characterClass);
+        if (returnRules.getIsValid()) {
             this.characterClassEnum = characterClass;
             setClassModifiers();
         }
+        return returnRules;
     }
 
     public EverEnum.CharacterClassEnum getCharacterClass() { return characterClassEnum; }
 
     public EverEnum.RaceEnum getRace() { return raceEnum; }
 
-    public void setRace(EverEnum.RaceEnum raceEnum) throws IllegalArgumentException{
-        if (alignment == EverEnum.Alignment.Evil && raceEnum == EverEnum.RaceEnum.HALFLING) {
-            throw new IllegalArgumentException("Halfling cannot have evil alignment");
+    public CharacterSetupRulesReturnObject setRace(EverEnum.RaceEnum raceEnum) {
+        CharacterSetupRulesReturnObject returnRules = CharacterSetupRules.validate(this.armorEnum, raceEnum, alignment, this.weapon, this.characterClassEnum);
+        if (returnRules.getIsValid()) {
+            this.raceEnum = raceEnum;
         }
-        if (raceEnum != EverEnum.RaceEnum.DWARF && armorEnum == EverEnum.Armor.PLATE){
-            throw new IllegalArgumentException("Only Dwarf can wear Plate armor");
-        }
-        this.raceEnum = raceEnum;
+        return returnRules;
     }
 
     public void setRogueHitAgainstEvilFlag() { rogueHitAgainstEvilFlag = true; }
@@ -435,12 +428,12 @@ public class EverCraftCharacter  {
         return weapon;
     }
 
-    public void setWeapon(EverEnum.Weapon weapon){
-        if (raceEnum == EverEnum.RaceEnum.HUMAN && weapon == EverEnum.Weapon.KNIFEOFOGRESLAYING){
-            throw new IllegalArgumentException("Human cannot use Knife of Ogre Slaying");
+    public CharacterSetupRulesReturnObject setWeapon(EverEnum.Weapon weapon){
+        CharacterSetupRulesReturnObject returnRules = CharacterSetupRules.validate(this.armorEnum, raceEnum, alignment, weapon, this.characterClassEnum);
+        if (returnRules.getIsValid()) {
+            this.weapon = weapon;
         }
-        this.weapon = weapon;
-
+        return returnRules;
    }
 
     public void setWarAxeAgainstOrcFlag(){
@@ -451,12 +444,14 @@ public class EverCraftCharacter  {
         return armorEnum;
     }
 
-    public void setArmor(EverEnum.Armor armor){
-        if (raceEnum != EverEnum.RaceEnum.DWARF && armor == EverEnum.Armor.PLATE){
-            throw new IllegalArgumentException("Only Dwarf can wear Plate armor");
-       }
-        this.armorEnum = armor;
+    public CharacterSetupRulesReturnObject setArmor(EverEnum.Armor armor){
+      CharacterSetupRulesReturnObject returnRules = CharacterSetupRules.validate(armor, this.raceEnum, this.alignment, this.weapon, this.characterClassEnum);
+        if (returnRules.getIsValid()) {
+            this.armorEnum = armor;
+        }
+        return returnRules;
     }
+
     public int getPlayerNumber(){
         return playerNumber;
     }

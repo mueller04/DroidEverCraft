@@ -27,6 +27,7 @@ public class WeaponTest {
         //Arrange
         EverEnum.Weapon expectedWeapon = EverEnum.Weapon.DAGGER;
         everCharacter = new EverCraftCharacter("Example Name", EverEnum.Alignment.Good);
+        everCharacter.setRace(EverEnum.RaceEnum.DWARF);
         everCharacter.setWeapon(EverEnum.Weapon.KNIFEOFOGRESLAYING);
         everCharacter.setWeapon(expectedWeapon);
 

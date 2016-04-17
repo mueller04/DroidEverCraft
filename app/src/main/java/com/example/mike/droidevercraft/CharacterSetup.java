@@ -85,6 +85,7 @@ public class CharacterSetup extends AppCompatActivity {
                 try {
                     everChar.setRace(currentRaceSelection);
                 } catch (IllegalArgumentException e) {
+                    //Change to non exception dialog that displays proper message
                     ExceptionDialog(e, raceSpinner, raceEnumIndex);
                 }
             }
