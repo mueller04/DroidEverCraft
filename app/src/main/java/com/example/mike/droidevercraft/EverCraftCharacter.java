@@ -5,15 +5,15 @@ public class EverCraftCharacter  {
 
     private String name;
     private int playerNumber;
-    private EverEnum.Weapon weapon = EverEnum.Weapon.NOWEAPON;
+    private EverEnum.Weapon weapon;
     private EverEnum.Alignment alignment;
     private EverEnum.LifeStatus lifeStatus;
     private int experiencePoints;
-    private int hitPoints = 5;
+    private int hitPoints;
     private Abilities abilities;
     private EverEnum.CharacterClassEnum characterClassEnum;
     private EverEnum.RaceEnum raceEnum;
-    private EverEnum.Armor armorEnum = EverEnum.Armor.NONE;
+    private EverEnum.Armor armorEnum;
 
     //Class Related
     private boolean rogueHitAgainstEvilFlag = false;
@@ -35,6 +35,9 @@ public class EverCraftCharacter  {
         this.abilities = new Abilities();
         this.characterClassEnum = EverEnum.CharacterClassEnum.DEFAULT;
         this.raceEnum = EverEnum.RaceEnum.HUMAN;
+        this.weapon = EverEnum.Weapon.NOWEAPON;
+        this.armorEnum = EverEnum.Armor.NONE;
+        this.hitPoints = 5;
     }
 
 
