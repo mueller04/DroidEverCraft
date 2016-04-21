@@ -1,8 +1,6 @@
 package com.example.mike.droidevercraft;
 
-/**
- * Created by Mike on 4/15/16.
- */
+
 public class CharacterSetupRulesReturnObject {
 
     private boolean isValid;

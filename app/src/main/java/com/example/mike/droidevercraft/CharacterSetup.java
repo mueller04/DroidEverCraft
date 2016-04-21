@@ -59,6 +59,21 @@ public class CharacterSetup extends AppCompatActivity {
         createArmorSpinner();
     }
 
+    private void invalidSpinnerSelection(CharacterSetupRulesReturnObject returnObj, Spinner spinner, int currentSpinnerIndex){
+        int resetPositionToCurrentSelection = currentSpinnerIndex;
+        spinner.setSelection(resetPositionToCurrentSelection);
+        String message = returnObj.getMessage();
+        spinnerAlertDialog(message);
+    }
+
+    private void spinnerAlertDialog(String message){
+        alertBuilder.setTitle("Alert!");
+        alertBuilder.setMessage(message);
+        dialog = alertBuilder.create();
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(true);
+    }
+
 
     private void createRaceSpinner(){
         ArrayList<EverEnum.RaceEnum> raceSpinnerOptions = new ArrayList<>();
@@ -82,11 +97,12 @@ public class CharacterSetup extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 EverEnum.RaceEnum currentRaceSelection = (EverEnum.RaceEnum) parent.getItemAtPosition(position);
-                try {
-                    everChar.setRace(currentRaceSelection);
-                } catch (IllegalArgumentException e) {
-                    //Change to non exception dialog that displays proper message
-                    ExceptionDialog(e, raceSpinner, raceEnumIndex);
+                CharacterSetupRulesReturnObject returnObj = everChar.setRace(currentRaceSelection);
+
+                if (!returnObj.getIsValid()){
+                    invalidSpinnerSelection(returnObj, raceSpinner, raceEnumIndex);
+                }  else {
+                    raceEnumIndex = raceSpinner.getSelectedItemPosition();
                 }
             }
 
@@ -118,11 +134,15 @@ public class CharacterSetup extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
+
                 EverEnum.CharacterClassEnum currentClassSelection = (EverEnum.CharacterClassEnum) parent.getItemAtPosition(position);
-                try {
-                    everChar.setCharacterClass(currentClassSelection);
-                } catch (IllegalArgumentException e) {
-                    ExceptionDialog(e, classSpinner, raceEnumIndex);
+                CharacterSetupRulesReturnObject returnObj = everChar.setCharacterClass(currentClassSelection);
+
+
+                if (!returnObj.getIsValid()){
+                    invalidSpinnerSelection(returnObj, classSpinner, classEnumIndex);
+                } else {
+                    classEnumIndex = classSpinner.getSelectedItemPosition();
                 }
             }
 
@@ -155,10 +175,12 @@ public class CharacterSetup extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 EverEnum.Alignment currentAlignmentSelection = (EverEnum.Alignment) parent.getItemAtPosition(position);
-                try {
-                    everChar.setAlignment(currentAlignmentSelection);
-                } catch (IllegalArgumentException e) {
-                    ExceptionDialog(e, alignmentSpinner, alignmentEnumIndex);
+                CharacterSetupRulesReturnObject returnObj = everChar.setAlignment(currentAlignmentSelection);
+
+                if (!returnObj.getIsValid()){
+                    invalidSpinnerSelection(returnObj, alignmentSpinner, alignmentEnumIndex);
+                } else {
+                alignmentEnumIndex = alignmentSpinner.getSelectedItemPosition();
                 }
             }
 
@@ -191,10 +213,12 @@ public class CharacterSetup extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 EverEnum.Weapon currentWeaponSelection = (EverEnum.Weapon) parent.getItemAtPosition(position);
-                try {
-                    everChar.setWeapon(currentWeaponSelection);
-                } catch (IllegalArgumentException e) {
-                    ExceptionDialog(e, weaponSpinner, weaponEnumIndex);
+                CharacterSetupRulesReturnObject returnObj = everChar.setWeapon(currentWeaponSelection);
+
+                if (!returnObj.getIsValid()){
+                    invalidSpinnerSelection(returnObj, weaponSpinner, weaponEnumIndex);
+                } else {
+                weaponEnumIndex = weaponSpinner.getSelectedItemPosition();
                 }
             }
 
@@ -226,11 +250,14 @@ public class CharacterSetup extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
+
                 EverEnum.Armor currentArmorSelection = (EverEnum.Armor) parent.getItemAtPosition(position);
-                try {
-                    everChar.setArmor(currentArmorSelection);
-                } catch (IllegalArgumentException e) {
-                    ExceptionDialog(e, armorSpinner, armorEnumIndex);
+                CharacterSetupRulesReturnObject returnObj = everChar.setArmor(currentArmorSelection);
+
+                if (!returnObj.getIsValid()){
+                    invalidSpinnerSelection(returnObj, armorSpinner, armorEnumIndex);
+                } else {
+                    armorEnumIndex = armorSpinner.getSelectedItemPosition();
                 }
             }
 
@@ -271,13 +298,5 @@ public class CharacterSetup extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    private void ExceptionDialog(IllegalArgumentException e, Spinner spinner, int index){
-        alertBuilder.setMessage(e.getMessage());
-        dialog = alertBuilder.create();
-        spinner.setSelection(index);
-        dialog.show();
-    }
-
 
 }
