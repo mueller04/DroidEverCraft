@@ -40,6 +40,6 @@ dependencies {
         exclude module: 'hamcrest-integration'
         exclude group: 'javax.inject'
     }
-
+    androidTestCompile 'com.android.support:support-annotations:23.2.0'
     androidTestCompile 'com.android.support.test:runner:0.5'
 }
