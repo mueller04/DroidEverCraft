@@ -17,6 +17,7 @@ public class EverCraftCharacter  {
     private EverEnum.CharacterClassEnum characterClassEnum;
     private EverEnum.RaceEnum raceEnum;
     private EverEnum.Armor armorEnum;
+    private CharacterSetupRules characterSetupRules;
 
     //Class Related
     private boolean rogueHitAgainstEvilFlag = false;
@@ -41,6 +42,7 @@ public class EverCraftCharacter  {
         this.weapon = EverEnum.Weapon.NOWEAPON;
         this.armorEnum = EverEnum.Armor.NONE;
         this.hitPoints = 5;
+        this.characterSetupRules = new CharacterSetupRules();
     }
 
 
@@ -367,7 +369,7 @@ public class EverCraftCharacter  {
 
     public CharacterSetupRulesReturnObject setAlignment(EverEnum.Alignment alignment) {
 
-        CharacterSetupRulesReturnObject returnRules = CharacterSetupRules.validate(this.armorEnum, this.raceEnum, alignment, this.weapon, this.characterClassEnum);
+        CharacterSetupRulesReturnObject returnRules = characterSetupRules.validate(this.armorEnum, this.raceEnum, alignment, this.weapon, this.characterClassEnum);
         if (returnRules.getIsValid()) {
             this.alignment = alignment;
         }
@@ -404,7 +406,7 @@ public class EverCraftCharacter  {
     }
 
     public CharacterSetupRulesReturnObject setCharacterClass(EverEnum.CharacterClassEnum characterClass){
-        CharacterSetupRulesReturnObject returnRules = CharacterSetupRules.validate(this.armorEnum, raceEnum, alignment, this.weapon, characterClass);
+        CharacterSetupRulesReturnObject returnRules = characterSetupRules.validate(this.armorEnum, raceEnum, alignment, this.weapon, characterClass);
         if (returnRules.getIsValid()) {
             this.characterClassEnum = characterClass;
             setClassModifiers();
@@ -417,7 +419,7 @@ public class EverCraftCharacter  {
     public EverEnum.RaceEnum getRace() { return raceEnum; }
 
     public CharacterSetupRulesReturnObject setRace(EverEnum.RaceEnum raceEnum) {
-        CharacterSetupRulesReturnObject returnRules = CharacterSetupRules.validate(this.armorEnum, raceEnum, alignment, this.weapon, this.characterClassEnum);
+        CharacterSetupRulesReturnObject returnRules = characterSetupRules.validate(this.armorEnum, raceEnum, alignment, this.weapon, this.characterClassEnum);
         if (returnRules.getIsValid()) {
             this.raceEnum = raceEnum;
         }
@@ -435,7 +437,7 @@ public class EverCraftCharacter  {
     }
 
     public CharacterSetupRulesReturnObject setWeapon(EverEnum.Weapon weapon){
-        CharacterSetupRulesReturnObject returnRules = CharacterSetupRules.validate(this.armorEnum, raceEnum, alignment, weapon, this.characterClassEnum);
+        CharacterSetupRulesReturnObject returnRules = characterSetupRules.validate(this.armorEnum, raceEnum, alignment, weapon, this.characterClassEnum);
         if (returnRules.getIsValid()) {
             this.weapon = weapon;
         }
@@ -451,7 +453,7 @@ public class EverCraftCharacter  {
     }
 
     public CharacterSetupRulesReturnObject setArmor(EverEnum.Armor armor){
-      CharacterSetupRulesReturnObject returnRules = CharacterSetupRules.validate(armor, this.raceEnum, this.alignment, this.weapon, this.characterClassEnum);
+      CharacterSetupRulesReturnObject returnRules = characterSetupRules.validate(armor, this.raceEnum, this.alignment, this.weapon, this.characterClassEnum);
         if (returnRules.getIsValid()) {
             this.armorEnum = armor;
         }

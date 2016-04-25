@@ -3,9 +3,23 @@ package charactersetup;
 
 import com.example.mike.droidevercraft.EverEnum;
 
+import java.util.ArrayList;
+
 public class CharacterSetupRules {
 
-    public static CharacterSetupRulesReturnObject validate(EverEnum.Armor armor,
+    private ArrayList<SetupRule> setupRuleList;
+
+    public CharacterSetupRules(){
+        setupRuleList = new ArrayList<SetupRule>();
+        setupRuleList.add(new DefenderCannotBeEvil());
+        setupRuleList.add(new HalflingCannotBeEvil());
+        setupRuleList.add(new HumanCannotUseKnifeOfOgreSlaying());
+        setupRuleList.add(new OnlyDwarfCanWearPlateArmor());
+        setupRuleList.add(new RogueCanOnlyBeNeutral());
+        setupRuleList.add(new WarlordCannotBeGood());
+    }
+
+    public CharacterSetupRulesReturnObject validate(EverEnum.Armor armor,
                                                            EverEnum.RaceEnum race,
                                                            EverEnum.Alignment alignment,
                                                            EverEnum.Weapon weapon,
@@ -13,33 +27,10 @@ public class CharacterSetupRules {
 
         CharacterSetupRulesReturnObject returnObject = new CharacterSetupRulesReturnObject();
         
-        if (race != EverEnum.RaceEnum.DWARF && armor == EverEnum.Armor.PLATE){
-            returnObject.setIsValid(false);
-            returnObject.setMessage("Only Dwarf can wear Plate armor");
-        } else if (alignment == EverEnum.Alignment.Evil && race == EverEnum.RaceEnum.HALFLING){
-            returnObject.setIsValid(false);
-            returnObject.setMessage("Halfling cannot have evil alignment");
-        } else if (race != EverEnum.RaceEnum.DWARF && armor == EverEnum.Armor.PLATE){
-            returnObject.setIsValid(false);
-            returnObject.setMessage("Only Dwarf can wear Plate armor");
-        } else if (alignment == EverEnum.Alignment.Evil && race == EverEnum.RaceEnum.HALFLING) {
-            returnObject.setIsValid(false);
-            returnObject.setMessage("Halfling cannot have evil alignment");
-        } else if (race == EverEnum.RaceEnum.HUMAN && weapon == EverEnum.Weapon.KNIFEOFOGRESLAYING){
-            returnObject.setIsValid(false);
-            returnObject.setMessage("Human cannot use Knife of Ogre Slaying");
-        } else if (race == EverEnum.RaceEnum.HUMAN && weapon == EverEnum.Weapon.KNIFEOFOGRESLAYING){
-            returnObject.setIsValid(false);
-            returnObject.setMessage("Human cannot use Knife of Ogre Slaying");
-        } else if (alignment == EverEnum.Alignment.Evil && characterClass == EverEnum.CharacterClassEnum.DEFENDER) {
-            returnObject.setIsValid(false);
-            returnObject.setMessage("Defender Class cannot have evil alignment");
-        } else if (alignment == EverEnum.Alignment.Good && characterClass == EverEnum.CharacterClassEnum.WARLORD) {
-            returnObject.setIsValid(false);
-            returnObject.setMessage("Warlord Class cannot have good alignment");
-        } else if ((alignment == EverEnum.Alignment.Good || alignment == EverEnum.Alignment.Evil) && characterClass == EverEnum.CharacterClassEnum.ROGUE) {
-            returnObject.setIsValid(false);
-            returnObject.setMessage("Rogue Class cannot have good or evil alignment");
+        for (SetupRule rule : setupRuleList){
+            if (returnObject.getIsValid()){
+                returnObject = rule.execute(armor, race, alignment, weapon, characterClass);
+            }
         }
         return returnObject;
     }
