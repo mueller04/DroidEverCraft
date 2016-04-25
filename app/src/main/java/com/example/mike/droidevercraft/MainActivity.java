@@ -5,12 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
+
+import charactersetup.CharacterSetupActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 || !textInput.getText().toString().equalsIgnoreCase("Player Two")){
             everChar.setName(textInput.getText().toString());
         }
-        Intent intent = new Intent(this, CharacterSetup.class);
+        Intent intent = new Intent(this, CharacterSetupActivity.class);
         String characterSerialized = gs.toJson(everChar);
         intent.putExtra("characterAny", characterSerialized);
         startActivityForResult(intent, 200);

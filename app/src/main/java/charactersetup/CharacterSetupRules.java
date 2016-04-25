@@ -1,5 +1,7 @@
-package com.example.mike.droidevercraft;
+package charactersetup;
 
+
+import com.example.mike.droidevercraft.EverEnum;
 
 public class CharacterSetupRules {
 
@@ -41,5 +43,6 @@ public class CharacterSetupRules {
         }
         return returnObject;
     }
+
 
 }

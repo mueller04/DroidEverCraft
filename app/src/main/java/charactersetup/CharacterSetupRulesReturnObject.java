@@ -1,4 +1,4 @@
-package com.example.mike.droidevercraft;
+package charactersetup;
 
 
 public class CharacterSetupRulesReturnObject {

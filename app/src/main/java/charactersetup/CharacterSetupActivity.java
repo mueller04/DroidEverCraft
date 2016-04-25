@@ -1,11 +1,10 @@
-package com.example.mike.droidevercraft;
+package charactersetup;
 
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,11 +13,14 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.mike.droidevercraft.EverCraftCharacter;
+import com.example.mike.droidevercraft.EverEnum;
+import com.example.mike.droidevercraft.R;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class CharacterSetup extends AppCompatActivity {
+public class CharacterSetupActivity extends AppCompatActivity {
 
     Gson gs;
     EverCraftCharacter everChar;
@@ -32,6 +34,8 @@ public class CharacterSetup extends AppCompatActivity {
     private int armorEnumIndex;
     private EverEnum.RaceEnum raceOnScreenLoad;
 
+    public CharacterSetupActivity(){
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +49,16 @@ public class CharacterSetup extends AppCompatActivity {
 
         gs = new Gson();
         Intent intent = getIntent();
-        String evercharSerialized2 = (String)intent.getStringExtra("characterAny");
-        everChar = gs.fromJson(evercharSerialized2, EverCraftCharacter.class);
+        String evercharSerialized = (String)intent.getStringExtra("characterAny");
+
+        everChar = gs.fromJson(evercharSerialized, EverCraftCharacter.class);
+        if (everChar == null){
+            everChar = new EverCraftCharacter("test character", EverEnum.Alignment.Neutral);
+        }
+
         characterName = (EditText) findViewById(R.id.character_name_input);
-        characterName.setText(everChar.getName());
+        String name = everChar.getName();
+        characterName.setText(name);
 
         raceOnScreenLoad = everChar.getRace();
 
@@ -87,7 +97,7 @@ public class CharacterSetup extends AppCompatActivity {
         }
 
         final Spinner raceSpinner = (Spinner)findViewById(R.id.race_spinner);
-        ArrayAdapter<EverEnum.RaceEnum>adapter = new ArrayAdapter<EverEnum.RaceEnum>(CharacterSetup.this,
+        ArrayAdapter<EverEnum.RaceEnum>adapter = new ArrayAdapter<EverEnum.RaceEnum>(CharacterSetupActivity.this,
                 android.R.layout.simple_spinner_item, raceSpinnerOptions);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -125,7 +135,7 @@ public class CharacterSetup extends AppCompatActivity {
         }
 
         final Spinner classSpinner = (Spinner)findViewById(R.id.class_spinner);
-        ArrayAdapter<EverEnum.CharacterClassEnum>adapter = new ArrayAdapter<EverEnum.CharacterClassEnum>(CharacterSetup.this,
+        ArrayAdapter<EverEnum.CharacterClassEnum>adapter = new ArrayAdapter<EverEnum.CharacterClassEnum>(CharacterSetupActivity.this,
                 android.R.layout.simple_spinner_item, classSpinnerOptions);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -165,7 +175,7 @@ public class CharacterSetup extends AppCompatActivity {
         }
 
         final Spinner alignmentSpinner = (Spinner)findViewById(R.id.alignment_spinner);
-        ArrayAdapter<EverEnum.Alignment>adapter = new ArrayAdapter<EverEnum.Alignment>(CharacterSetup.this,
+        ArrayAdapter<EverEnum.Alignment>adapter = new ArrayAdapter<EverEnum.Alignment>(CharacterSetupActivity.this,
                 android.R.layout.simple_spinner_item, alignmentSpinnerOptions);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -203,7 +213,7 @@ public class CharacterSetup extends AppCompatActivity {
         }
 
         final Spinner weaponSpinner = (Spinner)findViewById(R.id.weapon_spinner);
-        ArrayAdapter<EverEnum.Weapon>adapter = new ArrayAdapter<EverEnum.Weapon>(CharacterSetup.this,
+        ArrayAdapter<EverEnum.Weapon>adapter = new ArrayAdapter<EverEnum.Weapon>(CharacterSetupActivity.this,
                 android.R.layout.simple_spinner_item, alignmentWeaponOptions);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -241,7 +251,7 @@ public class CharacterSetup extends AppCompatActivity {
         }
 
         final Spinner armorSpinner = (Spinner)findViewById(R.id.armor_spinner);
-        ArrayAdapter<EverEnum.Armor>adapter = new ArrayAdapter<EverEnum.Armor>(CharacterSetup.this,
+        ArrayAdapter<EverEnum.Armor>adapter = new ArrayAdapter<EverEnum.Armor>(CharacterSetupActivity.this,
                 android.R.layout.simple_spinner_item, alignmentArmorOptions);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

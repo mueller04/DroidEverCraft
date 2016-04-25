@@ -1,6 +1,9 @@
 package com.example.mike.droidevercraft;
 
 
+import charactersetup.CharacterSetupRules;
+import charactersetup.CharacterSetupRulesReturnObject;
+
 public class EverCraftCharacter  {
 
     private String name;
