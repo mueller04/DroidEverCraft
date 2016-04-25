@@ -1,4 +1,4 @@
-package charactersetup;
+package com.example.mike.charactersetup;
 
 import com.example.mike.droidevercraft.EverEnum;
 
@@ -7,6 +7,8 @@ public class OnlyDwarfCanWearPlateArmor implements SetupRule {
 
     CharacterSetupRulesReturnObject returnObject = new CharacterSetupRulesReturnObject();
 
+    public OnlyDwarfCanWearPlateArmor(){
+    }
 
     @Override
     public CharacterSetupRulesReturnObject execute(EverEnum.Armor armor,

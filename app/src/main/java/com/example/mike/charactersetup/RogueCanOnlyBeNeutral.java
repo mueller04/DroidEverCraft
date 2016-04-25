@@ -1,4 +1,4 @@
-package charactersetup;
+package com.example.mike.charactersetup;
 
 import com.example.mike.droidevercraft.EverEnum;
 
@@ -6,6 +6,9 @@ import com.example.mike.droidevercraft.EverEnum;
 public class RogueCanOnlyBeNeutral implements SetupRule {
 
     CharacterSetupRulesReturnObject returnObject = new CharacterSetupRulesReturnObject();
+
+    public RogueCanOnlyBeNeutral(){
+    }
 
     @Override
     public CharacterSetupRulesReturnObject execute(EverEnum.Armor armor,

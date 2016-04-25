@@ -1,4 +1,4 @@
-package charactersetup;
+package com.example.mike.charactersetup;
 
 
 import com.example.mike.droidevercraft.EverEnum;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class CharacterSetupRules {
 
-    private ArrayList<SetupRule> setupRuleList;
+    private static ArrayList<SetupRule> setupRuleList;
 
     public CharacterSetupRules(){
         setupRuleList = new ArrayList<SetupRule>();

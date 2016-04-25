@@ -25,7 +25,7 @@
                 android:value="com.example.mike.droidevercraft.MainActivity" />
         </activity>
         <activity
-            android:name="charactersetup.CharacterSetupActivity"
+            android:name="com.example.mike.charactersetup.CharacterSetupActivity"
             android:label="@string/title_activity_character_setup"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

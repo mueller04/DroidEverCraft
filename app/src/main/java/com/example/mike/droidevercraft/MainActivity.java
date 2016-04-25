@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 
-import charactersetup.CharacterSetupActivity;
+import com.example.mike.charactersetup.CharacterSetupActivity;
 
 
 public class MainActivity extends AppCompatActivity {

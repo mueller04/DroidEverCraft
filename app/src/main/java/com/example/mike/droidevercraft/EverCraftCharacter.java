@@ -1,8 +1,8 @@
 package com.example.mike.droidevercraft;
 
 
-import charactersetup.CharacterSetupRules;
-import charactersetup.CharacterSetupRulesReturnObject;
+import com.example.mike.charactersetup.CharacterSetupRules;
+import com.example.mike.charactersetup.CharacterSetupRulesReturnObject;
 
 public class EverCraftCharacter  {
 

@@ -1,10 +1,13 @@
-package charactersetup;
+package com.example.mike.charactersetup;
 
 import com.example.mike.droidevercraft.EverEnum;
 
-public class WarlordCannotBeGood implements SetupRule {
+public class HumanCannotUseKnifeOfOgreSlaying implements SetupRule {
 
     CharacterSetupRulesReturnObject returnObject = new CharacterSetupRulesReturnObject();
+
+    public HumanCannotUseKnifeOfOgreSlaying(){
+    }
 
     @Override
     public CharacterSetupRulesReturnObject execute(EverEnum.Armor armor,
@@ -12,9 +15,9 @@ public class WarlordCannotBeGood implements SetupRule {
                                                    EverEnum.Alignment alignment,
                                                    EverEnum.Weapon weapon,
                                                    EverEnum.CharacterClassEnum characterClass) {
-        if (alignment == EverEnum.Alignment.Good && characterClass == EverEnum.CharacterClassEnum.WARLORD) {
+        if (race == EverEnum.RaceEnum.HUMAN && weapon == EverEnum.Weapon.KNIFEOFOGRESLAYING){
             returnObject.setIsValid(false);
-            returnObject.setMessage("Warlord Class cannot have good alignment");
+            returnObject.setMessage("Human cannot use Knife of Ogre Slaying");
         }
         return returnObject;
     }

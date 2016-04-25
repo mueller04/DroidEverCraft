@@ -1,10 +1,13 @@
-package charactersetup;
+package com.example.mike.charactersetup;
 
 import com.example.mike.droidevercraft.EverEnum;
 
-public class HalflingCannotBeEvil implements SetupRule {
+public class WarlordCannotBeGood implements SetupRule {
 
     CharacterSetupRulesReturnObject returnObject = new CharacterSetupRulesReturnObject();
+
+    public WarlordCannotBeGood(){
+    }
 
     @Override
     public CharacterSetupRulesReturnObject execute(EverEnum.Armor armor,
@@ -12,9 +15,9 @@ public class HalflingCannotBeEvil implements SetupRule {
                                                    EverEnum.Alignment alignment,
                                                    EverEnum.Weapon weapon,
                                                    EverEnum.CharacterClassEnum characterClass) {
-        if (alignment == EverEnum.Alignment.Evil && race == EverEnum.RaceEnum.HALFLING) {
+        if (alignment == EverEnum.Alignment.Good && characterClass == EverEnum.CharacterClassEnum.WARLORD) {
             returnObject.setIsValid(false);
-            returnObject.setMessage("Halfling cannot have evil alignment");
+            returnObject.setMessage("Warlord Class cannot have good alignment");
         }
         return returnObject;
     }

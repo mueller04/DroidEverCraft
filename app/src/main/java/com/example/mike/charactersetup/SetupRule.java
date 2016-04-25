@@ -1,4 +1,4 @@
-package charactersetup;
+package com.example.mike.charactersetup;
 
 
 import com.example.mike.droidevercraft.EverEnum;
